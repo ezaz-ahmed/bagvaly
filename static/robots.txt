@@ -1,0 +1,11 @@
+User-agent: *
+Disallow: /admin
+Disallow: /cart
+Disallow: /checkout
+Disallow: /account
+Disallow: /api/
+Disallow: /en/cart
+Disallow: /en/checkout
+Disallow: /en/account
+
+Sitemap: https://bagvaly.com/sitemap.xml
