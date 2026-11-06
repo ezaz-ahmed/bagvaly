@@ -1,13 +1,23 @@
 {
 	"$schema": "./node_modules/wrangler/config-schema.json",
 	"name": "bagvaly",
-	"compatibility_date": "2026-10-31",
+	"compatibility_date": "2026-10-30",
 	"compatibility_flags": ["nodejs_als"],
 	"main": ".svelte-kit/cloudflare/_worker.js",
 	"assets": {
 		"binding": "ASSETS",
 		"directory": ".svelte-kit/cloudflare"
 	},
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "bagvaly",
+			// Placeholder for local development only. Replace with the ID printed by
+			// `wrangler d1 create bagvaly --location apac` before any remote deploy.
+			"database_id": "00000000-0000-0000-0000-000000000000",
+			"migrations_dir": "drizzle"
+		}
+	],
 	"workers_dev": true,
 	"preview_urls": true
 }

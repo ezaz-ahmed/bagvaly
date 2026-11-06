@@ -5,24 +5,28 @@
 	"type": "module",
 	"scripts": {
 		"dev": "vp dev",
-		"build": "wrangler types --check && vp build",
+		"build": "wrangler types && vp build",
 		"preview": "wrangler dev .svelte-kit/cloudflare/_worker.js --port 4173",
-		"prepare": "svelte-kit sync || echo ''",
-		"check": "wrangler types --check && svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"prepare": "svelte-kit sync && wrangler types || echo ''",
+		"check": "wrangler types && svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "vp fmt --check . && vp lint .",
 		"format": "vp fmt .",
 		"test:unit": "vp test",
-		"test": "npm run test:unit -- --run && npm run test:e2e",
+		"test": "vp run test:unit --run && vp run test:e2e",
 		"test:e2e": "playwright install && playwright test",
 		"gen": "wrangler types",
 		"db:push": "drizzle-kit push",
 		"db:generate": "drizzle-kit generate",
 		"db:migrate": "drizzle-kit migrate",
+		"db:migrate:local": "wrangler d1 migrations apply DB --local",
 		"db:studio": "drizzle-kit studio",
 		"auth:schema": "auth generate --config src/lib/server/auth.ts --output src/lib/server/db/auth.schema.ts --yes"
 	},
 	"devDependencies": {
+		"@fontsource-variable/fraunces": "^5.3.0",
+		"@fontsource-variable/manrope": "^5.3.0",
+		"@fontsource/hind-siliguri": "^5.3.0",
 		"@inlang/paraglide-js": "^2.18.2",
 		"@playwright/test": "^1.60.0",
 		"@sveltejs/adapter-cloudflare": "^8.0.0",
@@ -37,23 +41,26 @@
 		"drizzle-kit": "^0.31.10",
 		"drizzle-orm": "^0.45.2",
 		"eslint-plugin-svelte": "^3.19.0",
-		"globals": "^17.6.0",
 		"svelte": "^5.57.1",
 		"svelte-check": "^4.6.0",
 		"tailwindcss": "^4.3.0",
 		"typescript": "^6.0.3",
 		"vite": "catalog:",
-		"wrangler": "^4.97.0",
-		"vite-plus": "catalog:"
+		"vite-plus": "catalog:",
+		"wrangler": "^4.97.0"
 	},
 	"imports": {
-		"#lib": "./src/lib/index.js",
 		"#lib/*": "./src/lib/*"
 	},
 	"devEngines": {
 		"packageManager": {
 			"name": "pnpm",
 			"version": "12.16.1",
+			"onFail": "download"
+		},
+		"runtime": {
+			"name": "node",
+			"version": "26.13.0",
 			"onFail": "download"
 		}
 	}

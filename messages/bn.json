@@ -1,4 +1,5 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
-	"hello_world": "Hello, {name} from bn!"
+	"site_name": "ব্যাগভ্যালি",
+	"home_tagline": "প্রতিদিনের আভিজাত্য, পৌঁছে যাবে আপনার দোরগোড়ায়।"
 }

@@ -1,3 +1,4 @@
+import { env } from 'cloudflare:workers';
 import { building } from '$app/env';
 import { createAuth } from '#lib/server/auth.ts';
 import { svelteKitHandler } from 'better-auth/svelte-kit';
@@ -19,10 +20,10 @@ const handleParaglide: Handle = ({ event, resolve }) =>
 	});
 
 const handleBetterAuth: Handle = async ({ event, resolve }) => {
-	if (!event.platform?.env?.DB)
-		throw new Error('D1 binding "DB" not found - are you running with wrangler?');
+	// Bindings are unavailable while prerendering; prerendered pages are public and session-free.
+	if (building) return resolve(event);
 
-	event.locals.auth = createAuth(event.platform.env.DB);
+	event.locals.auth = createAuth(env.DB);
 
 	const { auth } = event.locals;
 	const session = await auth.api.getSession({ headers: event.request.headers });

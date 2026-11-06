@@ -1,16 +1,12 @@
 import type { User, Session } from 'better-auth';
-import { createAuth } from '#lib/server/auth.ts';
+import type { createAuth } from '#lib/server/auth.ts';
 
 // See https://svelte.dev/docs/kit/types#app.d.ts
 // for information about these interfaces
 declare global {
 	namespace App {
-		interface Platform {
-			env: Env;
-			ctx: ExecutionContext;
-			caches: CacheStorage;
-			cf?: IncomingRequestCfProperties;
-		}
+		// adapter-cloudflare 8 does not populate `event.platform`; read bindings with
+		// `import { env, waitUntil } from 'cloudflare:workers'` instead.
 
 		interface Locals {
 			user?: User;

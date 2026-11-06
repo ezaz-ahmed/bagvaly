@@ -24,27 +24,13 @@ export default defineConfig({
 			node: true
 		},
 		ignorePatterns: [
-			'**/node_modules',
-			'**/.output',
-			'**/.vercel',
-			'**/.netlify',
-			'**/.wrangler',
-			'.svelte-kit',
-			'build',
-			'**/.DS_Store',
-			'**/Thumbs.db',
-			'**/.env',
-			'**/.env.*',
-			'!**/.env.example',
-			'!**/.env.test',
-			'**/vite.config.js.timestamp-*',
-			'**/vite.config.ts.timestamp-*',
-			'**/test-results',
-			'src/lib/paraglide',
-			'project.inlang/cache/',
-			'!**/.vscode/',
-			'!.vscode/settings.json',
-			'!.vscode/extensions.json'
+			'.svelte-kit/',
+			'.wrangler/',
+			'build/',
+			'drizzle/',
+			'test-results/',
+			'src/lib/paraglide/',
+			'worker-configuration.d.ts'
 		],
 		rules: {
 			'constructor-super': 'error',
@@ -111,6 +97,9 @@ export default defineConfig({
 			'valid-typeof': 'error',
 			'no-array-constructor': 'error',
 			'no-unused-expressions': 'error',
+			eqeqeq: 'error',
+			// Only warn/error reach Workers Logs intentionally; never log OTPs or customer data.
+			'no-console': ['error', { allow: ['warn', 'error'] }],
 			'svelte/comment-directive': 'error',
 			'svelte/infinite-reactive-loop': 'error',
 			'svelte/no-at-debug-tags': 'warn',
@@ -165,6 +154,10 @@ export default defineConfig({
 			'typescript/prefer-as-const': 'error',
 			'typescript/prefer-namespace-keyword': 'error',
 			'typescript/triple-slash-reference': 'error',
+			'typescript/consistent-type-imports': 'error',
+			'typescript/await-thenable': 'error',
+			'typescript/no-floating-promises': 'error',
+			'typescript/no-misused-promises': 'error',
 			'vite-plus/prefer-vite-plus-imports': 'error'
 		},
 		overrides: [
@@ -234,13 +227,11 @@ export default defineConfig({
 			}
 		],
 		ignorePatterns: [
-			'package-lock.json',
 			'pnpm-lock.yaml',
-			'yarn.lock',
-			'bun.lock',
-			'bun.lockb',
 			'/static/',
-			'/drizzle/'
+			'/drizzle/',
+			'/src/lib/paraglide/',
+			'worker-configuration.d.ts'
 		]
 	},
 	plugins: lazyPlugins(() => [

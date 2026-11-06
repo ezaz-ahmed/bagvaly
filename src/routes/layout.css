@@ -1,2 +1,37 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/forms';
+
+/* Self-hosted fonts. Fraunces `full` carries the SOFT and opsz axes; Hind Siliguri only
+   needs the Bengali subset because Fraunces and Manrope cover Latin. */
+@import '@fontsource-variable/fraunces/full.css';
+@import '@fontsource-variable/manrope';
+@import '@fontsource/hind-siliguri/bengali-400.css';
+@import '@fontsource/hind-siliguri/bengali-600.css';
+
+@theme {
+	--color-primary: #790b27;
+	--color-background: #fdf7eb;
+	--color-accent: #b99a6b;
+	--color-foreground: #292525;
+	--color-surface: #e8dccf;
+
+	--font-heading: 'Fraunces Variable', 'Hind Siliguri', Georgia, serif;
+	--font-heading--font-variation-settings: 'SOFT' 100;
+	--font-body: 'Manrope Variable', 'Hind Siliguri', system-ui, sans-serif;
+}
+
+@layer base {
+	body {
+		@apply bg-background font-body text-foreground;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		@apply font-heading;
+		font-optical-sizing: auto;
+	}
+}

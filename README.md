@@ -1,54 +1,106 @@
-# sv
+# Bagvaly
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Mobile-first storefront and admin for Bagvaly, a Bangladesh-focused ladies' bag shop.
+Cash on delivery first; most traffic comes from social-media campaigns on mobile data.
 
-## Creating a project
+Working rules for contributors and coding agents are in [AGENTS.md](AGENTS.md). Significant
+decisions and their rationale are in [docs/decisions.md](docs/decisions.md).
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Stack
 
-```sh
-# create a new project
-npx sv create my-app
-```
+| Layer          | Choice                                                                        |
+| -------------- | ----------------------------------------------------------------------------- |
+| Framework      | SvelteKit 3 + Svelte 5 (runes)                                                |
+| Styling        | Tailwind CSS 4 + `@tailwindcss/forms`                                         |
+| Tooling        | Vite+ (`vp`) on Vite 8: Oxlint, Oxfmt, Vitest; `svelte-check`; Playwright     |
+| Runtime        | Node.js LTS (pinned with `vp env pin`) + pnpm                                 |
+| Hosting        | Cloudflare Workers + static assets (`@sveltejs/adapter-cloudflare`), Wrangler |
+| Database       | Cloudflare D1 (APAC) + Drizzle ORM                                            |
+| Storage        | Cloudflare R2 for product image originals                                     |
+| Images         | Cloudflare Image Transformations (400/800/1200, q75, `format=auto`)           |
+| Auth           | Better Auth, phone-number OTP only                                            |
+| i18n           | Paraglide (`en`, `bn`)                                                        |
+| Fonts          | Fraunces (headings), Manrope (body), Hind Siliguri (Bangla), all self-hosted  |
+| Bot protection | Turnstile, Bot Fight Mode, WAF rate limits                                    |
+| Payments       | Cash on delivery (bKash/SSLCommerz later)                                     |
+| Marketing      | Meta Pixel + Conversions API, catalog feed, Open Graph                        |
+| Analytics      | Cloudflare Web Analytics; PostHog later (funnel events only)                  |
 
-To recreate this project with the same configuration:
+## Getting started
 
-```sh
-# recreate this project
-npx sv@1.1.1 create --template minimal --types ts --add prettier eslint vitest="usages:unit" playwright="demo:no" tailwindcss="plugins:forms" enhanced-img sveltekit-adapter="adapter:cloudflare+cfTarget:workers" drizzle="database:d1" better-auth="demo:none" paraglide="languageTags:en, bn+demo:no" ai-tools="ide:claude-code+delivery:plugin" --no-install ./bagvaly
-```
-
-## Adding features
-
-Add features to your project with `sv add`:
-
-```sh
-npx sv add
-```
-
-For example, to add Tailwind CSS:
-
-```sh
-npx sv add tailwindcss
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+Requires [Vite+](https://viteplus.dev) (`vp`). It installs the pinned Node.js and pnpm versions.
 
 ```sh
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+pnpm install                 # also runs `svelte-kit sync` and `wrangler types`
+cp .env.example .env         # then fill in the values (see below)
+vp run db:migrate:local      # create the auth tables in the local D1 database
+vp dev
 ```
 
-## Building
+### Environment variables
 
-To create a production version of your app:
+Local values live in `.env` (ignored by Git). Deployed values are Cloudflare secrets set with
+`wrangler secret put`.
 
-```sh
-npm run build
+| Variable                                                                 | Purpose                                                |
+| ------------------------------------------------------------------------ | ------------------------------------------------------ |
+| `ORIGIN`                                                                 | Public base URL, e.g. `http://localhost:5173`          |
+| `BETTER_AUTH_SECRET`                                                     | Session signing secret (32+ random characters)         |
+| `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_DATABASE_ID`, `CLOUDFLARE_D1_TOKEN` | Only for `drizzle-kit` commands that talk to remote D1 |
+
+### Phone OTP in development
+
+No SMS gateway is connected yet. On the dev server (`vp dev`) the OTP is printed to the terminal
+as `[sms:dev] OTP for +8801…`. Every build, including `vp run preview`, staging and production,
+refuses to send OTPs until a gateway adapter is added in `src/lib/server/providers/sms/`.
+
+## Commands
+
+| Command                   | What it does                                                    |
+| ------------------------- | --------------------------------------------------------------- |
+| `vp dev`                  | Start the dev server                                            |
+| `vp run build`            | Regenerate Worker types and build for Cloudflare                |
+| `vp run preview`          | Serve the build locally with Wrangler on port 4173              |
+| `vp run check`            | Regenerate Worker types, then type-check with `svelte-check`    |
+| `vp run lint`             | Check formatting (Oxfmt) and lint (Oxlint)                      |
+| `vp run format`           | Format the code                                                 |
+| `vp test`                 | Unit tests (Vitest) in watch mode; add `--run` for a single run |
+| `vp run test:e2e`         | Build, preview and run Playwright end-to-end tests              |
+| `vp run test`             | Unit tests, then end-to-end tests                               |
+| `vp run gen`              | Regenerate `worker-configuration.d.ts` from `wrangler.jsonc`    |
+| `vp run db:generate`      | Generate a migration in `drizzle/` from the schema              |
+| `vp run db:migrate:local` | Apply migrations to the local D1 database                       |
+| `vp run auth:schema`      | Regenerate the Better Auth tables after changing auth plugins   |
+
+Lint and format rules live in the `lint` and `fmt` sections of [vite.config.ts](vite.config.ts).
+Before handing off a change, run `vp run check`, `vp run lint` and `vp test --run`.
+
+## Project layout
+
+```text
+src/
+  lib/
+    server/
+      auth.ts          # Better Auth (phone OTP)
+      db/              # Drizzle schema and client
+      providers/sms/   # SMS adapter (dev-only until a gateway is chosen)
+    phone.ts           # Bangladeshi phone normalization (+8801XXXXXXXXX)
+  routes/              # Pages; layout.css holds the brand theme tokens
+messages/              # en.json, bn.json (Paraglide)
+drizzle/               # Committed D1 migrations
+docs/decisions.md      # Decision log
 ```
 
-You can preview the production build with `npm run preview`.
+## Deployment
+
+Not set up yet. The `DB` binding in `wrangler.jsonc` uses a placeholder ID that only works
+locally. Before the first deploy:
+
+1. Create the production and staging D1 databases (`wrangler d1 create … --location apac`) and
+   the R2 buckets.
+2. Add the real IDs and a separate `staging` environment to `wrangler.jsonc`.
+3. Set secrets per environment with `wrangler secret put`.
+4. Add deploy and remote-migration package scripts.
+
+Releases follow the order in AGENTS.md: local validation, then staging migrations and tests,
+then production.
