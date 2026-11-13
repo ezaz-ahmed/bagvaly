@@ -86,10 +86,7 @@ export function affectedUrls(
 	const urls = new Set<string>();
 	for (const locale of locales) {
 		for (const path of paths) {
-			const { href } = localizeUrl(new URL(path, origin), { locale });
-			urls.add(href);
-			// `/bn/` and `/bn` may both be requested; purge both spellings of the Bangla home page.
-			if (href.endsWith('/') && new URL(href).pathname !== '/') urls.add(href.slice(0, -1));
+			urls.add(localizeUrl(new URL(path, origin), { locale }).href);
 		}
 	}
 	return [...urls];

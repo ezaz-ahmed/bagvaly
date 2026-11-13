@@ -93,7 +93,6 @@ describe('affectedUrls', () => {
 				'https://bagvaly.test/shop?category=tote',
 				'https://bagvaly.test/shop?category=old',
 				'https://bagvaly.test/bags/tote-1',
-				'https://bagvaly.test/bn/',
 				'https://bagvaly.test/bn',
 				'https://bagvaly.test/bn/shop',
 				'https://bagvaly.test/bn/shop?category=tote',
