@@ -29,6 +29,7 @@ export default defineConfig({
 			'build/',
 			'drizzle/',
 			'test-results/',
+			'docs/design/',
 			'src/lib/paraglide/',
 			'worker-configuration.d.ts'
 		],
@@ -231,6 +232,7 @@ export default defineConfig({
 			'/static/',
 			'/drizzle/',
 			'/src/lib/paraglide/',
+			'/docs/design/',
 			'worker-configuration.d.ts'
 		]
 	},

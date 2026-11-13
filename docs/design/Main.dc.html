@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Bagvaly home, mobile</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,400..700,0..100;1,9..144,400..700,0..100&amp;family=Manrope:wght@400;500;600;700&amp;family=Hind+Siliguri:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#fdf7eb}
+[style*="Fraunces"]{font-variation-settings:"SOFT" 100;font-optical-sizing:auto}
+*{box-sizing:border-box}
+a{color:#8a6a3e}a:hover{color:#5e0820}
+button,a,summary{font-family:inherit}
+:focus-visible{outline:3px solid #b99a6b;outline-offset:2px}
+.bv-primary{transition:background-color 150ms cubic-bezier(0.2,0.7,0.2,1)}
+.bv-primary:hover{background:#5e0820 !important;color:#fdf7eb !important}
+.bv-secondary:hover{background:#f3e1e5 !important}
+.bv-foot a{color:#fdf7eb}.bv-foot a:hover{color:#fdf7eb;text-decoration:underline}
+.bv-scroll{scrollbar-width:none}.bv-scroll::-webkit-scrollbar{display:none}
+@media (prefers-reduced-motion: reduce){*{transition:none !important}}
+</style>
+</helmet>
+<div style="width: 390px; min-height: 3800px; display: flex; flex-direction: column; background: #fdf7eb; color: #292525; font-family: 'Manrope', 'Hind Siliguri', 'Noto Sans Bengali', system-ui, sans-serif; font-size: 16px; line-height: 1.6">
+
+<sc-if value="{{showBar}}" hint-placeholder-val="{{true}}">
+<div style="height: 40px; display: flex; align-items: center; justify-content: center; gap: 8px; background: #790b27; color: #fdf7eb; font-size: 14px; font-weight: 500">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"></rect><circle cx="12" cy="12" r="2.5"></circle></svg>
+<span>Cash on delivery all over Bangladesh</span>
+</div>
+</sc-if>
+
+<header style="height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 8px; background: #fdf7eb; border-bottom: 1px solid #e8dccf">
+<div style="display: flex">
+<button aria-label="Open menu" style="width: 48px; height: 48px; border: 0; background: transparent; color: #292525; display: flex; align-items: center; justify-content: center; border-radius: 12px; cursor: pointer"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button>
+<button aria-label="Search" style="width: 48px; height: 48px; border: 0; background: transparent; color: #292525; display: flex; align-items: center; justify-content: center; border-radius: 12px; cursor: pointer"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="M20 20l-4.2-4.2"></path></svg></button>
+</div>
+<a href="Main.dc.html" aria-label="Bagvaly home" style="text-decoration: none; font-family: 'Fraunces', Georgia, serif; font-size: 26px; font-weight: 600; letter-spacing: 0.16em; color: #790b27; line-height: 1">BAGVALY</a>
+<div style="display: flex">
+<button aria-label="Wishlist" style="width: 48px; height: 48px; border: 0; background: transparent; color: #292525; display: flex; align-items: center; justify-content: center; border-radius: 12px; cursor: pointer"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"></path></svg></button>
+<a href="Cart.dc.html" aria-label="Cart, 2 items" style="position: relative; width: 48px; height: 48px; color: #292525; display: flex; align-items: center; justify-content: center; border-radius: 12px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"></path><path d="M9 8V7a3 3 0 0 1 6 0v1"></path></svg><span style="position: absolute; top: 6px; right: 4px; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 999px; background: #790b27; color: #fdf7eb; font-size: 12px; font-weight: 600; line-height: 18px; text-align: center">2</span></a>
+</div>
+</header>
+
+<section aria-labelledby="hero-h" style="padding: 28px 0 48px; display: flex; flex-direction: column; gap: 24px">
+<div style="padding: 0 16px; display: flex; flex-direction: column; gap: 16px">
+<span style="align-self: flex-start; padding: 4px 12px; border-radius: 999px; border: 1px solid #790b27; color: #790b27; font-size: 12px; line-height: 1.35; font-weight: 700; letter-spacing: 0.12em">NEW SEASON · 2026</span>
+<h1 id="hero-h" style="margin: 0; font-family: 'Fraunces', 'Hind Siliguri', Georgia, serif; font-size: 60px; line-height: 0.98; font-weight: 700; letter-spacing: -0.035em">One bag for every <em style="font-style: italic; font-weight: 500; color: #790b27">you.</em></h1>
+<p style="margin: 0; font-size: 18px; line-height: 1.5; color: #6b6260">Campus, office, weddings and weekends. Everyday elegance, made affordable.</p>
+</div>
+
+<div style="padding: 0 16px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: 190px 190px 150px; gap: 8px">
+<div role="img" aria-label="Photo placeholder: college student on campus with a backpack" style="grid-row: span 2; position: relative; border-radius: 20px; background: #e8dccf; display: flex; align-items: center; justify-content: center; color: #8a6a3e">
+<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"></path><path d="M9 8V7a3 3 0 0 1 6 0v1"></path></svg>
+<span style="position: absolute; left: 10px; bottom: 10px; padding: 4px 12px; border-radius: 999px; background: #fdf7eb; color: #292525; font-size: 14px; font-weight: 700">Campus <span style="font-weight: 500; color: #6b6260">· Backpack</span></span>
+</div>
+<div role="img" aria-label="Photo placeholder: young woman heading to the office with a tote" style="position: relative; border-radius: 20px; background: #f3e1e5; display: flex; align-items: center; justify-content: center; color: #790b27">
+<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"></path><path d="M9 8V7a3 3 0 0 1 6 0v1"></path></svg>
+<span style="position: absolute; left: 10px; bottom: 10px; padding: 4px 12px; border-radius: 999px; background: #fdf7eb; color: #292525; font-size: 14px; font-weight: 700">Office <span style="font-weight: 500; color: #6b6260">· Tote</span></span>
+</div>
+<div role="img" aria-label="Photo placeholder: friends out on the weekend with crossbody bags" style="position: relative; border-radius: 20px; background: #d6c5b1; display: flex; align-items: center; justify-content: center; color: #5e0820">
+<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"></path><path d="M9 8V7a3 3 0 0 1 6 0v1"></path></svg>
+<span style="position: absolute; left: 10px; bottom: 10px; padding: 4px 12px; border-radius: 999px; background: #fdf7eb; color: #292525; font-size: 14px; font-weight: 700">Weekend <span style="font-weight: 500; color: #6b6260">· Crossbody</span></span>
+</div>
+<div role="img" aria-label="Photo placeholder: woman in a saree with an evening clutch at a wedding" style="grid-column: span 2; position: relative; border-radius: 20px; background: #292525; display: flex; align-items: center; justify-content: center; color: #b99a6b">
+<svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"></path><path d="M9 8V7a3 3 0 0 1 6 0v1"></path></svg>
+<span style="position: absolute; left: 10px; bottom: 10px; padding: 4px 12px; border-radius: 999px; background: #fdf7eb; color: #292525; font-size: 14px; font-weight: 700">Wedding &amp; Eid <span style="font-weight: 500; color: #6b6260">· Clutch</span></span>
+</div>
+</div>
+
+<div style="padding: 0 16px; display: flex; flex-direction: column; gap: 10px">
+<a href="Shop.dc.html" class="bv-primary" style="height: 56px; display: flex; align-items: center; justify-content: center; gap: 8px; border-radius: 12px; background: #790b27; color: #fdf7eb; text-decoration: none; font-weight: 700; font-size: 16px">Shop new arrivals <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></a>
+<p lang="bn" style="margin: 0; text-align: center; font-size: 16px; line-height: 1.7; color: #6b6260">প্রতিদিনের আভিজাত্য, সাধ্যের মধ্যে।</p>
+</div>
+
+<div aria-hidden="true" style="background: #790b27; color: #fdf7eb; padding: 14px 0; overflow: hidden; white-space: nowrap; font-family: 'Fraunces', Georgia, serif; font-style: italic; font-size: 28px; line-height: 1.1; font-weight: 500">
+<span style="display: inline-flex; align-items: center; gap: 16px; margin-left: -24px">Tote <span style="color: #b99a6b">✦</span> Crossbody <span style="color: #b99a6b">✦</span> Clutch <span style="color: #b99a6b">✦</span> Backpack <span style="color: #b99a6b">✦</span> Shoulder</span>
+</div>
+</section>
+
+<section aria-labelledby="cat-h" style="padding: 0 0 48px; display: flex; flex-direction: column; gap: 16px">
+<h2 id="cat-h" style="margin: 0; padding: 0 16px; font-family: 'Fraunces', 'Hind Siliguri', Georgia, serif; font-size: 28px; line-height: 1.15; font-weight: 600; letter-spacing: -0.005em">Shop by style</h2>
+<div class="bv-scroll" style="display: flex; gap: 12px; overflow-x: auto; padding: 0 16px">
+<sc-for list="{{categories}}" as="c" hint-placeholder-count="6">
+<a href="Shop.dc.html" style="flex: 0 0 auto; width: 84px; display: flex; flex-direction: column; align-items: center; gap: 8px; text-decoration: none; color: #292525">
+<span style="width: 76px; height: 76px; border-radius: 999px; background: #e8dccf; display: flex; align-items: center; justify-content: center; color: #8a6a3e"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"></path><path d="M9 8V7a3 3 0 0 1 6 0v1"></path></svg></span>
+<span style="font-size: 14px; line-height: 1.35; font-weight: 500; text-align: center">{{c.label}}</span>
+</a>
+</sc-for>
+</div>
+</section>
+
+<section aria-labelledby="new-h" style="padding: 0 16px 48px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; align-items: center; justify-content: space-between">
+<h2 id="new-h" style="margin: 0; font-family: 'Fraunces', 'Hind Siliguri', Georgia, serif; font-size: 28px; line-height: 1.15; font-weight: 600; letter-spacing: -0.005em">New arrivals</h2>
+<a href="Shop.dc.html" style="min-height: 48px; display: flex; align-items: center; gap: 4px; font-size: 14px; font-weight: 600; text-decoration: none">View all <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px">
+<sc-for list="{{products}}" as="p" hint-placeholder-count="4">
+<div style="position: relative; display: flex; flex-direction: column; background: #ffffff; border-radius: 20px; overflow: hidden; box-shadow: 0 1px 2px rgba(41, 37, 37, 0.06)">
+<a href="Product.dc.html" style="display: flex; flex-direction: column; text-decoration: none; color: #292525">
+<div role="img" aria-label="{{p.alt}}" style="position: relative; aspect-ratio: 4 / 5; background: #e8dccf; display: flex; align-items: center; justify-content: center; color: #8a6a3e">
+<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"></path><path d="M9 8V7a3 3 0 0 1 6 0v1"></path></svg>
+<sc-if value="{{p.isNew}}" hint-placeholder-val="{{false}}"><span style="position: absolute; top: 10px; left: 10px; padding: 4px 10px; border-radius: 999px; background: #f3e1e5; color: #790b27; font-size: 12px; line-height: 1.35; font-weight: 600; letter-spacing: 0.12em">NEW</span></sc-if>
+<sc-if value="{{p.isSale}}" hint-placeholder-val="{{false}}"><span style="position: absolute; top: 10px; left: 10px; padding: 4px 10px; border-radius: 999px; background: #790b27; color: #fdf7eb; font-size: 12px; line-height: 1.35; font-weight: 600; letter-spacing: 0.12em">SALE</span></sc-if>
+<sc-if value="{{p.isBest}}" hint-placeholder-val="{{false}}"><span style="position: absolute; top: 10px; left: 10px; padding: 4px 10px; border-radius: 999px; background: #ffffff; color: #292525; font-size: 12px; line-height: 1.35; font-weight: 600; letter-spacing: 0.12em">BEST SELLER</span></sc-if>
+</div>
+<div style="padding: 12px; display: flex; flex-direction: column; gap: 4px">
+<span style="font-size: 18px; line-height: 1.35; font-weight: 500; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden">{{p.name}}</span>
+<div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 8px">
+<span style="font-size: 16px; font-weight: 600">{{p.price}}</span>
+<sc-if value="{{p.was}}" hint-placeholder-val="{{false}}"><span style="font-size: 14px; color: #6b6260; text-decoration: line-through">{{p.was}}</span><span style="font-size: 14px; font-weight: 600; color: #8a6a3e">{{p.off}}</span></sc-if>
+</div>
+</div>
+</a>
+<button aria-label="Save to wishlist" style="position: absolute; top: 8px; right: 8px; width: 40px; height: 40px; border-radius: 999px; border: 0; background: #ffffff; color: #292525; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 1px 2px rgba(41, 37, 37, 0.06)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"></path></svg></button>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section aria-label="Why shop with us" style="background: #e8dccf; padding: 32px 16px; display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; gap: 16px; align-items: flex-start">
+<span style="flex: 0 0 auto; width: 44px; height: 44px; border-radius: 999px; background: #fdf7eb; color: #8a6a3e; display: flex; align-items: center; justify-content: center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"></rect><circle cx="12" cy="12" r="2.5"></circle></svg></span>
+<div><div style="font-weight: 600">Cash on delivery</div><div style="font-size: 14px">Pay when your bag arrives.</div></div>
+</div>
+<div style="display: flex; gap: 16px; align-items: flex-start">
+<span style="flex: 0 0 auto; width: 44px; height: 44px; border-radius: 999px; background: #fdf7eb; color: #8a6a3e; display: flex; align-items: center; justify-content: center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h11v10H3zM14 9h4l3 3.5V16h-7"></path><circle cx="7.5" cy="17.5" r="1.75"></circle><circle cx="17.5" cy="17.5" r="1.75"></circle></svg></span>
+<div><div style="font-weight: 600">Delivery all over Bangladesh</div><div style="font-size: 14px">2–3 days inside Dhaka, 3–5 days outside.</div></div>
+</div>
+<div style="display: flex; gap: 16px; align-items: flex-start">
+<span style="flex: 0 0 auto; width: 44px; height: 44px; border-radius: 999px; background: #fdf7eb; color: #8a6a3e; display: flex; align-items: center; justify-content: center"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9h13l-3-3M20 15H7l3 3"></path></svg></span>
+<div><div style="font-weight: 600">Easy exchange</div><div style="font-size: 14px">If something's not right, we'll make it right.</div></div>
+</div>
+</section>
+
+<section aria-labelledby="occ-h" style="padding: 48px 0; display: flex; flex-direction: column; gap: 16px">
+<h2 id="occ-h" style="margin: 0; padding: 0 16px; font-family: 'Fraunces', 'Hind Siliguri', Georgia, serif; font-size: 28px; line-height: 1.15; font-weight: 600; letter-spacing: -0.005em">Shop by occasion</h2>
+<div class="bv-scroll" style="display: flex; gap: 12px; overflow-x: auto; padding: 0 16px">
+<sc-for list="{{occasions}}" as="o" hint-placeholder-count="3">
+<a href="Shop.dc.html" style="flex: 0 0 auto; width: 240px; display: flex; flex-direction: column; gap: 8px; text-decoration: none; color: #292525">
+<span role="img" aria-label="{{o.alt}}" style="aspect-ratio: 4 / 5; border-radius: 20px; background: #e8dccf; display: flex; align-items: center; justify-content: center; color: #8a6a3e"><svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"></path><path d="M9 8V7a3 3 0 0 1 6 0v1"></path></svg></span>
+<span style="font-size: 18px; line-height: 1.35; font-weight: 500">{{o.label}}</span>
+</a>
+</sc-for>
+</div>
+</section>
+
+<section aria-labelledby="help-h" style="padding: 0 16px 48px">
+<div style="background: #ffffff; border: 1px solid #d6c5b1; border-radius: 20px; padding: 24px 20px; display: flex; flex-direction: column; gap: 12px">
+<h2 id="help-h" style="margin: 0; font-family: 'Fraunces', 'Hind Siliguri', Georgia, serif; font-size: 28px; line-height: 1.15; font-weight: 600; letter-spacing: -0.005em">Need help choosing?</h2>
+<p style="margin: 0; color: #6b6260">Message us on WhatsApp or give us a call. You can order there too.</p>
+<a href="https://wa.me/8801XXXXXXXXX" class="bv-secondary" style="height: 48px; display: flex; align-items: center; justify-content: center; gap: 8px; border-radius: 12px; border: 1.5px solid #790b27; color: #790b27; text-decoration: none; font-weight: 600"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"></path></svg>Chat on WhatsApp</a>
+<a href="tel:01XXXXXXXXX" style="min-height: 48px; display: flex; align-items: center; justify-content: center; gap: 8px; font-weight: 600; text-decoration: none"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 3.5h3l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5v3a2 2 0 0 1-2 2A16 16 0 0 1 4.5 5.5a2 2 0 0 1 2-2z"></path></svg>Call [01XXX-XXXXXX]</a>
+</div>
+</section>
+
+<footer class="bv-foot" style="margin-top: auto; background: #790b27; color: #fdf7eb; padding: 40px 16px 32px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 8px">
+<span style="font-family: 'Fraunces', Georgia, serif; font-size: 28px; font-weight: 600; letter-spacing: 0.16em; line-height: 1">BAGVALY</span>
+<span style="font-family: 'Fraunces', 'Hind Siliguri', Georgia, serif; font-size: 22px; font-weight: 500; line-height: 1.35">Everyday elegance, made affordable.</span>
+</div>
+<nav aria-label="Footer" style="display: flex; flex-direction: column">
+<a href="Shop.dc.html" style="min-height: 48px; display: flex; align-items: center; text-decoration: none">Shop all bags</a>
+<a href="#" style="min-height: 48px; display: flex; align-items: center; text-decoration: none">Track your order</a>
+<a href="#" style="min-height: 48px; display: flex; align-items: center; text-decoration: none">Delivery and exchange</a>
+<a href="#" style="min-height: 48px; display: flex; align-items: center; text-decoration: none">Contact us</a>
+</nav>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<a href="#" style="min-height: 48px; padding: 0 16px; display: flex; align-items: center; border: 1px solid #fdf7eb; border-radius: 999px; text-decoration: none; font-size: 14px; font-weight: 500">Facebook</a>
+<a href="#" style="min-height: 48px; padding: 0 16px; display: flex; align-items: center; border: 1px solid #fdf7eb; border-radius: 999px; text-decoration: none; font-size: 14px; font-weight: 500">Instagram</a>
+<a href="#" style="min-height: 48px; padding: 0 16px; display: flex; align-items: center; border: 1px solid #fdf7eb; border-radius: 999px; text-decoration: none; font-size: 14px; font-weight: 500">TikTok</a>
+<a href="#" style="min-height: 48px; padding: 0 16px; display: flex; align-items: center; border: 1px solid #fdf7eb; border-radius: 999px; text-decoration: none; font-size: 14px; font-weight: 500">YouTube</a>
+</div>
+<div style="display: flex; gap: 8px" role="group" aria-label="Language">
+<button aria-pressed="true" style="height: 48px; padding: 0 20px; border-radius: 12px; border: 0; background: #fdf7eb; color: #790b27; font-weight: 600; font-size: 16px; cursor: pointer">English</button>
+<button lang="bn" aria-pressed="false" style="height: 48px; padding: 0 20px; border-radius: 12px; border: 1px solid #fdf7eb; background: transparent; color: #fdf7eb; font-weight: 600; font-size: 16px; cursor: pointer">বাংলা</button>
+</div>
+<p style="margin: 0; font-size: 14px; border-top: 1px solid #b99a6b; padding-top: 16px">© 2026 Bagvaly · Cash on delivery all over Bangladesh</p>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"showBar":{"editor":"boolean","default":true},"$preview":{"width":390,"height":3800}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      showBar: this.props.showBar ?? true,
+      categories: [
+        { label: 'Shoulder' }, { label: 'Tote' }, { label: 'Crossbody' },
+        { label: 'Top-handle' }, { label: 'Clutch' }, { label: 'Backpack' }
+      ],
+      products: [
+        { name: 'Quilted chain shoulder bag', price: '৳ 1,450', was: '', off: '', isNew: true, isSale: false, isBest: false, alt: 'Burgundy quilted shoulder bag with gold chain' },
+        { name: 'Everyday canvas tote', price: '৳ 1,850', was: '', off: '', isNew: false, isSale: false, isBest: true, alt: 'Ivory canvas tote bag with leather handles' },
+        { name: 'Mini zip crossbody', price: '৳ 1,250', was: '৳ 1,550', off: '19% off', isNew: false, isSale: true, isBest: false, alt: 'Black mini crossbody bag with zip pocket' },
+        { name: 'Structured top-handle bag', price: '৳ 2,150', was: '', off: '', isNew: true, isSale: false, isBest: false, alt: 'Tan structured top-handle bag with gold clasp' }
+      ],
+      occasions: [
+        { label: 'Office days', alt: 'Photo placeholder: woman carrying a tote to the office' },
+        { label: 'Everyday errands', alt: 'Photo placeholder: crossbody bag on a busy street' },
+        { label: 'Weddings and Eid', alt: 'Photo placeholder: evening clutch with a saree' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

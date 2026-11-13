@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Bagvaly admin products</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,400..700,0..100;1,9..144,400..700,0..100&amp;family=Manrope:wght@400;500;600;700&amp;family=Hind+Siliguri:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#fdf7eb}
+[style*="Fraunces"]{font-variation-settings:"SOFT" 100;font-optical-sizing:auto}
+*{box-sizing:border-box}
+a{color:#8a6a3e}a:hover{color:#5e0820}
+button,a,input,select,textarea{font-family:inherit}
+:focus-visible{outline:3px solid #b99a6b;outline-offset:2px}
+input:focus,select:focus{outline:3px solid #b99a6b;outline-offset:2px}
+.bv-primary,.bv-secondary{transition:background-color 150ms cubic-bezier(0.2,0.7,0.2,1)}
+.bv-primary:hover{background:#5e0820 !important;color:#fdf7eb !important}
+.bv-secondary:hover{background:#f3e1e5 !important}
+.bv-side a{transition:background-color 150ms cubic-bezier(0.2,0.7,0.2,1)}
+.bv-side a:hover{background:#fdf7eb}
+.bv-side a[aria-current="page"]:hover{background:#f3e1e5}
+.bv-row:hover{background:#fdf7eb}
+table{border-collapse:collapse;width:100%}
+th{text-align:left;font-size:14px;font-weight:600;color:#6b6260;padding:12px 16px;border-bottom:1px solid #d6c5b1;white-space:nowrap}
+td{padding:12px 16px;border-bottom:1px solid #e8dccf;vertical-align:middle}
+@media (prefers-reduced-motion: reduce){*{transition:none !important}}
+</style>
+</helmet>
+<div style="width: 100%; min-height: 1400px; display: flex; flex-wrap: wrap; background: #fdf7eb; color: #292525; font-family: 'Manrope', 'Hind Siliguri', 'Noto Sans Bengali', system-ui, sans-serif; font-size: 16px; line-height: 1.6">
+
+<aside class="bv-side" style="flex: 1 1 232px; background: #ffffff; border-right: 1px solid #e8dccf; padding: 24px 16px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; align-items: baseline; gap: 10px; padding: 0 12px">
+<span style="font-family: 'Fraunces', Georgia, serif; font-size: 26px; font-weight: 600; letter-spacing: 0.16em; color: #790b27; line-height: 1">BAGVALY</span>
+<span style="font-size: 12px; font-weight: 600; letter-spacing: 0.12em; color: #8a6a3e">ADMIN</span>
+</div>
+<nav aria-label="Admin" style="display: flex; flex-direction: column; gap: 4px">
+<a href="AdminDashboard.dc.html" style="min-height: 48px; padding: 0 12px; display: flex; align-items: center; gap: 12px; border-radius: 12px; color: #292525; font-weight: 500; text-decoration: none"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"></path></svg>Dashboard</a>
+<a href="AdminOrders.dc.html" style="min-height: 48px; padding: 0 12px; display: flex; align-items: center; gap: 12px; border-radius: 12px; color: #292525; font-weight: 500; text-decoration: none"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7l8-4 8 4v10l-8 4-8-4z"></path><path d="M4 7l8 4 8-4M12 11v10"></path></svg><span style="flex: 1">Orders</span><span style="min-width: 24px; height: 24px; padding: 0 8px; border-radius: 999px; background: #790b27; color: #fdf7eb; font-size: 12px; font-weight: 600; line-height: 24px; text-align: center">6</span></a>
+<a href="AdminProducts.dc.html" aria-current="page" style="min-height: 48px; padding: 0 12px; display: flex; align-items: center; gap: 12px; border-radius: 12px; background: #f3e1e5; color: #790b27; font-weight: 600; text-decoration: none"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"></path><path d="M9 8V7a3 3 0 0 1 6 0v1"></path></svg>Products</a>
+<a href="#" style="min-height: 48px; padding: 0 12px; display: flex; align-items: center; gap: 12px; border-radius: 12px; color: #292525; font-weight: 500; text-decoration: none"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"></circle><path d="M3 20a6 6 0 0 1 12 0M16 4.5a3.5 3.5 0 0 1 0 7M17 14a6 6 0 0 1 4 6"></path></svg>Customers</a>
+<a href="#" style="min-height: 48px; padding: 0 12px; display: flex; align-items: center; gap: 12px; border-radius: 12px; color: #292525; font-weight: 500; text-decoration: none"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h11v10H3zM14 9h4l3 3.5V16h-7"></path><circle cx="7.5" cy="17.5" r="1.75"></circle><circle cx="17.5" cy="17.5" r="1.75"></circle></svg>Delivery and couriers</a>
+<a href="#" style="min-height: 48px; padding: 0 12px; display: flex; align-items: center; gap: 12px; border-radius: 12px; color: #292525; font-weight: 500; text-decoration: none"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"></path><circle cx="16" cy="7" r="2"></circle><circle cx="10" cy="17" r="2"></circle></svg>Settings</a>
+</nav>
+<div style="margin-top: auto; display: flex; flex-direction: column; gap: 12px; padding: 0 12px">
+<a href="HomeDesktop.dc.html" style="min-height: 44px; display: flex; align-items: center; gap: 8px; font-weight: 600; text-decoration: none">View store <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"></path></svg></a>
+<div style="display: flex; align-items: center; gap: 10px; padding-top: 12px; border-top: 1px solid #e8dccf">
+<span style="width: 36px; height: 36px; border-radius: 999px; background: #790b27; color: #fdf7eb; font-weight: 600; display: flex; align-items: center; justify-content: center">E</span>
+<span style="display: flex; flex-direction: column; line-height: 1.35"><span style="font-weight: 600">Ezaz</span><span style="font-size: 14px; color: #6b6260">Owner</span></span>
+</div>
+</div>
+</aside>
+
+<main style="flex: 999 1 560px; min-width: 0; padding: 32px; display: flex; flex-direction: column; gap: 20px">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px">
+<div>
+<h1 style="margin: 0; font-family: 'Fraunces', 'Hind Siliguri', Georgia, serif; font-size: 36px; line-height: 1.15; font-weight: 600; letter-spacing: -0.005em">Products</h1>
+<span style="font-size: 14px; color: #6b6260">48 products · 26 added this month</span>
+</div>
+<a href="AdminProductEdit.dc.html" class="bv-primary" style="height: 48px; padding: 0 20px; display: flex; align-items: center; gap: 8px; border-radius: 12px; background: #790b27; color: #fdf7eb; text-decoration: none; font-weight: 600"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Add product</a>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center">
+<div style="flex: 1 1 320px; position: relative; display: flex; align-items: center">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6b6260" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="position: absolute; left: 14px"><circle cx="11" cy="11" r="6.5"></circle><path d="M20 20l-4.2-4.2"></path></svg>
+<label for="p-search" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Search products</label>
+<input id="p-search" type="search" placeholder="Search by name or SKU" style="width: 100%; height: 48px; padding: 0 14px 0 44px; border: 1px solid #d6c5b1; border-radius: 6px; background: #ffffff; color: #292525; font-size: 16px">
+</div>
+<label style="display: flex; align-items: center; gap: 8px; font-size: 14px; color: #6b6260">Category
+<select style="height: 48px; padding: 0 12px; border: 1px solid #d6c5b1; border-radius: 6px; background: #ffffff; color: #292525; font-size: 16px"><option>All</option><option>Shoulder</option><option>Tote</option><option>Crossbody</option><option>Top-handle</option><option>Clutch</option><option>Backpack</option></select>
+</label>
+</div>
+
+<div role="tablist" aria-label="Product status" style="display: flex; gap: 4px; overflow-x: auto; border-bottom: 1px solid #d6c5b1">
+<sc-for list="{{tabs}}" as="t" hint-placeholder-count="4">
+<sc-if value="{{t.on}}" hint-placeholder-val="{{false}}"><button role="tab" aria-selected="true" onClick="{{t.pick}}" style="flex: 0 0 auto; height: 48px; padding: 0 14px; border: 0; border-bottom: 2px solid #790b27; background: transparent; color: #790b27; font-size: 16px; font-weight: 600; cursor: pointer; white-space: nowrap">{{t.label}} <span style="font-size: 14px">{{t.count}}</span></button></sc-if>
+<sc-if value="{{t.off}}" hint-placeholder-val="{{true}}"><button role="tab" aria-selected="false" onClick="{{t.pick}}" style="flex: 0 0 auto; height: 48px; padding: 0 14px; border: 0; border-bottom: 2px solid transparent; background: transparent; color: #6b6260; font-size: 16px; font-weight: 500; cursor: pointer; white-space: nowrap">{{t.label}} <span style="font-size: 14px">{{t.count}}</span></button></sc-if>
+</sc-for>
+</div>
+
+<section aria-label="Products" style="background: #ffffff; border: 1px solid #d6c5b1; border-radius: 20px; overflow: hidden">
+<div style="overflow-x: auto">
+<table>
+<thead><tr><th scope="col">Product</th><th scope="col">Category</th><th scope="col" style="text-align: right">Price</th><th scope="col">Stock by colour</th><th scope="col">Status</th><th scope="col">Updated</th><th scope="col"><span style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0)">Actions</span></th></tr></thead>
+<tbody>
+<sc-for list="{{rows}}" as="p" hint-placeholder-count="8">
+<tr class="bv-row">
+<td><a href="AdminProductEdit.dc.html" style="display: flex; align-items: center; gap: 12px; color: #292525; text-decoration: none">
+<span role="img" aria-label="{{p.alt}}" style="flex: 0 0 auto; width: 48px; height: 60px; border-radius: 6px; background: #e8dccf"></span>
+<span style="line-height: 1.35"><span style="display: block; font-weight: 600">{{p.name}}</span><span style="display: block; font-size: 14px; color: #6b6260">{{p.sku}} · {{p.photos}} photos</span></span>
+</a></td>
+<td>{{p.cat}}</td>
+<td style="text-align: right; white-space: nowrap"><span style="display: block; font-weight: 600">{{p.price}}</span><sc-if value="{{p.was}}" hint-placeholder-val="{{false}}"><span style="display: block; font-size: 14px; color: #6b6260; text-decoration: line-through">{{p.was}}</span></sc-if></td>
+<td><div style="display: flex; flex-wrap: wrap; gap: 6px">
+<sc-for list="{{p.stock}}" as="s" hint-placeholder-count="3">
+<span title="{{s.name}}" style="display: inline-flex; align-items: center; gap: 6px; padding: 2px 10px 2px 4px; border-radius: 999px; background: {{s.bg}}; color: {{s.fg}}; font-size: 14px; font-weight: 600; white-space: nowrap"><span style="width: 16px; height: 16px; border-radius: 999px; background: {{s.hex}}; border: 1px solid #d6c5b1"></span>{{s.qty}}</span>
+</sc-for>
+</div></td>
+<td><span style="display: inline-flex; align-items: center; gap: 6px; padding: 2px 10px; border-radius: 999px; background: {{p.sbg}}; color: {{p.sfg}}; font-size: 14px; font-weight: 600; white-space: nowrap"><span style="width: 6px; height: 6px; border-radius: 999px; background: currentColor"></span>{{p.status}}</span></td>
+<td style="font-size: 14px; color: #6b6260; white-space: nowrap">{{p.updated}}</td>
+<td style="text-align: right"><a href="AdminProductEdit.dc.html" style="min-height: 44px; padding: 0 12px; display: inline-flex; align-items: center; font-weight: 600; text-decoration: none">Edit</a></td>
+</tr>
+</sc-for>
+</tbody>
+</table>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 12px 20px; font-size: 14px; color: #6b6260">
+<span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 12px; height: 12px; border-radius: 999px; background: #fbf0d9; border: 1px solid #8a5a00"></span>2 or fewer left</span>
+<span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 12px; height: 12px; border-radius: 999px; background: #f8e4e2; border: 1px solid #a8281f"></span>Sold out, shows "Sold out" in the store</span>
+</div>
+</section>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1400}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { tab: 'all' }; }
+  renderVals() {
+    const C = { Burgundy: '#790b27', Black: '#292525', Ivory: '#fdf7eb', Tan: '#b99a6b', Sand: '#e8dccf' };
+    const st = (name, qty) => ({ name, qty, hex: C[name], bg: qty === 0 ? '#f8e4e2' : qty <= 2 ? '#fbf0d9' : '#fdf7eb', fg: qty === 0 ? '#a8281f' : qty <= 2 ? '#8a5a00' : '#292525' });
+    const STATUS = { Published: ['#e3f0e9', '#2e6b4e'], Draft: ['#e8dccf', '#292525'], Hidden: ['#fdf7eb', '#6b6260'] };
+    const all = [
+      { name: 'Quilted chain shoulder bag', sku: 'BV-QCS', photos: 5, cat: 'Shoulder', price: '৳ 1,450', was: '', stock: [st('Burgundy', 2), st('Black', 6), st('Ivory', 4), st('Tan', 3)], status: 'Published', updated: 'Today', alt: 'Burgundy quilted shoulder bag' },
+      { name: 'Everyday canvas tote', sku: 'BV-ECT', photos: 4, cat: 'Tote', price: '৳ 1,850', was: '', stock: [st('Ivory', 9), st('Black', 5), st('Tan', 7)], status: 'Published', updated: 'Yesterday', alt: 'Ivory canvas tote' },
+      { name: 'Mini zip crossbody', sku: 'BV-MZC', photos: 4, cat: 'Crossbody', price: '৳ 1,250', was: '৳ 1,550', stock: [st('Black', 1), st('Burgundy', 4)], status: 'Published', updated: '27 Oct', alt: 'Black mini crossbody' },
+      { name: 'Structured top-handle bag', sku: 'BV-STH', photos: 5, cat: 'Top-handle', price: '৳ 2,150', was: '', stock: [st('Tan', 5), st('Black', 3), st('Burgundy', 4)], status: 'Published', updated: '26 Oct', alt: 'Tan top-handle bag' },
+      { name: 'Pearl evening clutch', sku: 'BV-PEC', photos: 4, cat: 'Clutch', price: '৳ 990', was: '', stock: [st('Ivory', 0), st('Black', 2)], status: 'Published', updated: '24 Oct', alt: 'Ivory pearl clutch' },
+      { name: 'Woven bucket bag', sku: 'BV-WBB', photos: 4, cat: 'Shoulder', price: '৳ 1,650', was: '', stock: [st('Sand', 8), st('Tan', 6)], status: 'Published', updated: '22 Oct', alt: 'Sand woven bucket bag' },
+      { name: 'Classic work satchel', sku: 'BV-CWS', photos: 3, cat: 'Top-handle', price: '৳ 2,350', was: '', stock: [st('Burgundy', 10), st('Black', 10)], status: 'Draft', updated: 'Today', alt: 'Burgundy work satchel' },
+      { name: 'Mini backpack', sku: 'BV-MBP', photos: 4, cat: 'Backpack', price: '৳ 1,550', was: '৳ 1,750', stock: [st('Tan', 0), st('Black', 0)], status: 'Hidden', updated: '12 Oct', alt: 'Tan mini backpack' }
+    ];
+    const isLow = (p) => p.stock.some((s) => s.qty <= 2);
+    const tabDefs = [
+      ['all', 'All', 48, () => true],
+      ['Published', 'Published', 44, (p) => p.status === 'Published'],
+      ['Draft', 'Drafts', 3, (p) => p.status === 'Draft'],
+      ['low', 'Low or sold out', 5, isLow]
+    ];
+    const cur = tabDefs.find((t) => t[0] === this.state.tab) || tabDefs[0];
+    return {
+      tabs: tabDefs.map((t) => ({ label: t[1], count: t[2], on: t[0] === cur[0], off: t[0] !== cur[0], pick: () => this.setState({ tab: t[0] }) })),
+      rows: all.filter(cur[3]).map((p) => ({ ...p, sbg: STATUS[p.status][0], sfg: STATUS[p.status][1] }))
+    };
+  }
+}
+</script>
+</body>
+</html>

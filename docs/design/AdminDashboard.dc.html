@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Bagvaly admin dashboard</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,400..700,0..100;1,9..144,400..700,0..100&amp;family=Manrope:wght@400;500;600;700&amp;family=Hind+Siliguri:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#fdf7eb}
+[style*="Fraunces"]{font-variation-settings:"SOFT" 100;font-optical-sizing:auto}
+*{box-sizing:border-box}
+a{color:#8a6a3e}a:hover{color:#5e0820}
+button,a,input,select,textarea{font-family:inherit}
+:focus-visible{outline:3px solid #b99a6b;outline-offset:2px}
+.bv-primary,.bv-secondary{transition:background-color 150ms cubic-bezier(0.2,0.7,0.2,1)}
+.bv-primary:hover{background:#5e0820 !important;color:#fdf7eb !important}
+.bv-secondary:hover{background:#f3e1e5 !important}
+.bv-side a{transition:background-color 150ms cubic-bezier(0.2,0.7,0.2,1)}
+.bv-side a:hover{background:#fdf7eb}
+.bv-side a[aria-current="page"]:hover{background:#f3e1e5}
+.bv-row:hover{background:#fdf7eb}
+table{border-collapse:collapse;width:100%}
+th{text-align:left;font-size:14px;font-weight:600;color:#6b6260;padding:12px 16px;border-bottom:1px solid #d6c5b1;white-space:nowrap}
+td{padding:14px 16px;border-bottom:1px solid #e8dccf;vertical-align:middle}
+@media (prefers-reduced-motion: reduce){*{transition:none !important}}
+</style>
+</helmet>
+<div style="width: 100%; min-height: 1500px; display: flex; flex-wrap: wrap; background: #fdf7eb; color: #292525; font-family: 'Manrope', 'Hind Siliguri', 'Noto Sans Bengali', system-ui, sans-serif; font-size: 16px; line-height: 1.6">
+
+<aside class="bv-side" style="flex: 1 1 232px; background: #ffffff; border-right: 1px solid #e8dccf; padding: 24px 16px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; align-items: baseline; gap: 10px; padding: 0 12px">
+<span style="font-family: 'Fraunces', Georgia, serif; font-size: 26px; font-weight: 600; letter-spacing: 0.16em; color: #790b27; line-height: 1">BAGVALY</span>
+<span style="font-size: 12px; font-weight: 600; letter-spacing: 0.12em; color: #8a6a3e">ADMIN</span>
+</div>
+<nav aria-label="Admin" style="display: flex; flex-direction: column; gap: 4px">
+<a href="AdminDashboard.dc.html" aria-current="page" style="min-height: 48px; padding: 0 12px; display: flex; align-items: center; gap: 12px; border-radius: 12px; background: #f3e1e5; color: #790b27; font-weight: 600; text-decoration: none"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"></path></svg>Dashboard</a>
+<a href="AdminOrders.dc.html" style="min-height: 48px; padding: 0 12px; display: flex; align-items: center; gap: 12px; border-radius: 12px; color: #292525; font-weight: 500; text-decoration: none"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7l8-4 8 4v10l-8 4-8-4z"></path><path d="M4 7l8 4 8-4M12 11v10"></path></svg><span style="flex: 1">Orders</span><span style="min-width: 24px; height: 24px; padding: 0 8px; border-radius: 999px; background: #790b27; color: #fdf7eb; font-size: 12px; font-weight: 600; line-height: 24px; text-align: center">6</span></a>
+<a href="AdminProducts.dc.html" style="min-height: 48px; padding: 0 12px; display: flex; align-items: center; gap: 12px; border-radius: 12px; color: #292525; font-weight: 500; text-decoration: none"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"></path><path d="M9 8V7a3 3 0 0 1 6 0v1"></path></svg>Products</a>
+<a href="#" style="min-height: 48px; padding: 0 12px; display: flex; align-items: center; gap: 12px; border-radius: 12px; color: #292525; font-weight: 500; text-decoration: none"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"></circle><path d="M3 20a6 6 0 0 1 12 0M16 4.5a3.5 3.5 0 0 1 0 7M17 14a6 6 0 0 1 4 6"></path></svg>Customers</a>
+<a href="#" style="min-height: 48px; padding: 0 12px; display: flex; align-items: center; gap: 12px; border-radius: 12px; color: #292525; font-weight: 500; text-decoration: none"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h11v10H3zM14 9h4l3 3.5V16h-7"></path><circle cx="7.5" cy="17.5" r="1.75"></circle><circle cx="17.5" cy="17.5" r="1.75"></circle></svg>Delivery and couriers</a>
+<a href="#" style="min-height: 48px; padding: 0 12px; display: flex; align-items: center; gap: 12px; border-radius: 12px; color: #292525; font-weight: 500; text-decoration: none"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"></path><circle cx="16" cy="7" r="2"></circle><circle cx="10" cy="17" r="2"></circle></svg>Settings</a>
+</nav>
+<div style="margin-top: auto; display: flex; flex-direction: column; gap: 12px; padding: 0 12px">
+<a href="HomeDesktop.dc.html" style="min-height: 44px; display: flex; align-items: center; gap: 8px; font-weight: 600; text-decoration: none">View store <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"></path></svg></a>
+<div style="display: flex; align-items: center; gap: 10px; padding-top: 12px; border-top: 1px solid #e8dccf">
+<span style="width: 36px; height: 36px; border-radius: 999px; background: #790b27; color: #fdf7eb; font-weight: 600; display: flex; align-items: center; justify-content: center">E</span>
+<span style="display: flex; flex-direction: column; line-height: 1.35"><span style="font-weight: 600">Ezaz</span><span style="font-size: 14px; color: #6b6260">Owner</span></span>
+</div>
+</div>
+</aside>
+
+<main style="flex: 999 1 560px; min-width: 0; padding: 32px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px">
+<div>
+<span style="font-size: 14px; color: #6b6260">Thursday, 29 October</span>
+<h1 style="margin: 0; font-family: 'Fraunces', 'Hind Siliguri', Georgia, serif; font-size: 36px; line-height: 1.15; font-weight: 600; letter-spacing: -0.005em">Dashboard</h1>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<a href="HomeDesktop.dc.html" class="bv-secondary" style="height: 48px; padding: 0 20px; display: flex; align-items: center; border-radius: 12px; border: 1.5px solid #790b27; color: #790b27; text-decoration: none; font-weight: 600">View store</a>
+<a href="AdminProductEdit.dc.html" class="bv-primary" style="height: 48px; padding: 0 20px; display: flex; align-items: center; gap: 8px; border-radius: 12px; background: #790b27; color: #fdf7eb; text-decoration: none; font-weight: 600"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Add product</a>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px">
+<div style="background: #f3e1e5; border-radius: 20px; padding: 20px; display: flex; flex-direction: column; gap: 4px">
+<span style="font-size: 14px; font-weight: 600; color: #790b27">To confirm by phone</span>
+<span style="font-family: 'Fraunces', Georgia, serif; font-size: 44px; line-height: 1.15; font-weight: 600; color: #790b27">6</span>
+<a href="AdminOrders.dc.html" style="min-height: 44px; display: flex; align-items: center; gap: 6px; color: #790b27; font-weight: 600; text-decoration: none">Start calling <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"></path></svg></a>
+</div>
+<div style="background: #ffffff; border: 1px solid #d6c5b1; border-radius: 20px; padding: 20px; display: flex; flex-direction: column; gap: 4px">
+<span style="font-size: 14px; font-weight: 600; color: #6b6260">Orders today</span>
+<span style="font-family: 'Fraunces', Georgia, serif; font-size: 44px; line-height: 1.15; font-weight: 600">14</span>
+<span style="font-size: 14px; color: #6b6260">11 from the website, 3 from WhatsApp</span>
+</div>
+<div style="background: #ffffff; border: 1px solid #d6c5b1; border-radius: 20px; padding: 20px; display: flex; flex-direction: column; gap: 4px">
+<span style="font-size: 14px; font-weight: 600; color: #6b6260">With courier</span>
+<span style="font-family: 'Fraunces', Georgia, serif; font-size: 44px; line-height: 1.15; font-weight: 600">12</span>
+<span style="font-size: 14px; color: #6b6260">৳ 19,850 to collect</span>
+</div>
+<div style="background: #ffffff; border: 1px solid #d6c5b1; border-radius: 20px; padding: 20px; display: flex; flex-direction: column; gap: 4px">
+<span style="font-size: 14px; font-weight: 600; color: #6b6260">Collected, last 7 days</span>
+<span style="font-family: 'Fraunces', Georgia, serif; font-size: 44px; line-height: 1.15; font-weight: 600">৳ 48,300</span>
+<span style="font-size: 14px; color: #6b6260">31 orders delivered</span>
+</div>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+<div style="flex: 999 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+
+<section aria-labelledby="att-h" style="background: #ffffff; border: 1px solid #d6c5b1; border-radius: 20px; padding: 8px 0">
+<h2 id="att-h" style="margin: 0; padding: 16px 20px 8px; font-family: 'Fraunces', 'Hind Siliguri', Georgia, serif; font-size: 22px; line-height: 1.15; font-weight: 600">Needs your attention</h2>
+<sc-for list="{{attention}}" as="a" hint-placeholder-count="4">
+<a href="{{a.href}}" class="bv-row" style="min-height: 64px; padding: 8px 20px; display: flex; align-items: center; gap: 14px; border-top: 1px solid #e8dccf; color: #292525; text-decoration: none">
+<span style="flex: 0 0 auto; width: 40px; height: 40px; border-radius: 999px; background: {{a.bg}}; color: {{a.fg}}; display: flex; align-items: center; justify-content: center"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7.5v5M12 16h.01"></path></svg></span>
+<span style="flex: 1; min-width: 0"><span style="display: block; font-weight: 600">{{a.title}}</span><span style="display: block; font-size: 14px; color: #6b6260">{{a.sub}}</span></span>
+<span style="font-size: 14px; font-weight: 600; color: #8a6a3e; white-space: nowrap">{{a.cta}}</span>
+</a>
+</sc-for>
+</section>
+
+<section aria-labelledby="rec-h" style="background: #ffffff; border: 1px solid #d6c5b1; border-radius: 20px; overflow: hidden">
+<div style="display: flex; align-items: center; justify-content: space-between; padding: 16px 20px 8px">
+<h2 id="rec-h" style="margin: 0; font-family: 'Fraunces', 'Hind Siliguri', Georgia, serif; font-size: 22px; line-height: 1.15; font-weight: 600">Latest orders</h2>
+<a href="AdminOrders.dc.html" style="min-height: 44px; display: flex; align-items: center; font-size: 14px; font-weight: 600; text-decoration: none">All orders</a>
+</div>
+<div style="overflow-x: auto">
+<table>
+<thead><tr><th scope="col">Order</th><th scope="col">Customer</th><th scope="col">District</th><th scope="col" style="text-align: right">Total</th><th scope="col">Status</th><th scope="col">Placed</th></tr></thead>
+<tbody>
+<sc-for list="{{orders}}" as="o" hint-placeholder-count="5">
+<tr class="bv-row">
+<td><a href="AdminOrder.dc.html" style="font-weight: 600; text-decoration: none; color: #790b27">{{o.id}}</a></td>
+<td><span style="display: block">{{o.name}}</span><span style="display: block; font-size: 14px; color: #6b6260">{{o.phone}}</span></td>
+<td>{{o.district}}</td>
+<td style="text-align: right; font-weight: 600; white-space: nowrap">{{o.total}}</td>
+<td><span style="display: inline-flex; align-items: center; gap: 6px; padding: 2px 10px; border-radius: 999px; background: {{o.bg}}; color: {{o.fg}}; border: 1px solid {{o.bd}}; font-size: 14px; font-weight: 600; white-space: nowrap"><span style="width: 6px; height: 6px; border-radius: 999px; background: currentColor"></span>{{o.status}}</span></td>
+<td style="font-size: 14px; color: #6b6260; white-space: nowrap">{{o.when}}</td>
+</tr>
+</sc-for>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+
+<div style="flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+<section aria-labelledby="low-h" style="background: #ffffff; border: 1px solid #d6c5b1; border-radius: 20px; padding: 16px 20px; display: flex; flex-direction: column; gap: 4px">
+<h2 id="low-h" style="margin: 0 0 8px; font-family: 'Fraunces', 'Hind Siliguri', Georgia, serif; font-size: 22px; line-height: 1.15; font-weight: 600">Low stock</h2>
+<sc-for list="{{low}}" as="l" hint-placeholder-count="3">
+<a href="AdminProductEdit.dc.html" style="min-height: 56px; display: flex; align-items: center; gap: 12px; color: #292525; text-decoration: none; border-top: 1px solid #e8dccf">
+<span style="flex: 0 0 auto; width: 36px; height: 45px; border-radius: 6px; background: #e8dccf"></span>
+<span style="flex: 1; min-width: 0; line-height: 1.35"><span style="display: block; font-weight: 500">{{l.name}}</span><span style="display: block; font-size: 14px; color: #6b6260">{{l.colour}}</span></span>
+<span style="padding: 2px 10px; border-radius: 999px; background: #fbf0d9; color: #8a5a00; font-size: 14px; font-weight: 600; white-space: nowrap">{{l.left}} left</span>
+</a>
+</sc-for>
+</section>
+
+<section aria-labelledby="best-h" style="background: #ffffff; border: 1px solid #d6c5b1; border-radius: 20px; padding: 16px 20px; display: flex; flex-direction: column; gap: 4px">
+<h2 id="best-h" style="margin: 0 0 8px; font-family: 'Fraunces', 'Hind Siliguri', Georgia, serif; font-size: 22px; line-height: 1.15; font-weight: 600">Best sellers this week</h2>
+<sc-for list="{{best}}" as="b" hint-placeholder-count="3">
+<div style="min-height: 48px; display: flex; align-items: center; gap: 12px; border-top: 1px solid #e8dccf">
+<span style="width: 24px; font-family: 'Fraunces', Georgia, serif; font-size: 22px; font-weight: 600; color: #8a6a3e">{{b.rank}}</span>
+<span style="flex: 1; font-weight: 500">{{b.name}}</span>
+<span style="font-size: 14px; color: #6b6260">{{b.sold}} sold</span>
+</div>
+</sc-for>
+</section>
+
+<section aria-labelledby="alert-h" style="background: #e8dccf; border-radius: 20px; padding: 16px 20px; display: flex; flex-direction: column; gap: 8px">
+<h2 id="alert-h" style="margin: 0; font-family: 'Fraunces', 'Hind Siliguri', Georgia, serif; font-size: 22px; line-height: 1.15; font-weight: 600">Order alerts</h2>
+<div style="display: flex; justify-content: space-between"><span>WhatsApp to [01XXX-XXXXXX]</span><span style="font-weight: 600; color: #2e6b4e">On</span></div>
+<div style="display: flex; justify-content: space-between"><span>Email to bagvaly.hq</span><span style="font-weight: 600">Off</span></div>
+<a href="#" style="min-height: 44px; display: flex; align-items: center; font-size: 14px; font-weight: 600; color: #292525">Change in Settings</a>
+</section>
+</div>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1500}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const S = {
+      'To confirm': ['#fbf0d9', '#8a5a00', '#fbf0d9'],
+      'Confirmed': ['#f3e1e5', '#790b27', '#f3e1e5'],
+      'Packed': ['#e8dccf', '#292525', '#e8dccf'],
+      'Shipped': ['#ffffff', '#292525', '#d6c5b1'],
+      'Delivered': ['#e3f0e9', '#2e6b4e', '#e3f0e9'],
+      'Returned': ['#f8e4e2', '#a8281f', '#f8e4e2']
+    };
+    const row = (id, name, phone, district, total, status, when) => ({ id, name, phone, district, total, status, when, bg: S[status][0], fg: S[status][1], bd: S[status][2] });
+    return {
+      attention: [
+        { title: '6 orders waiting for a confirmation call', sub: 'Oldest placed 3 hours ago', cta: 'Open orders', href: 'AdminOrders.dc.html', bg: '#fbf0d9', fg: '#8a5a00' },
+        { title: '1 order from a number with past returns', sub: '#BV-10231 · 2 earlier parcels returned', cta: 'Check', href: 'AdminOrder.dc.html', bg: '#f8e4e2', fg: '#a8281f' },
+        { title: '3 products are low on stock', sub: 'Fewer than 3 left in a colour', cta: 'Restock', href: 'AdminProducts.dc.html', bg: '#fbf0d9', fg: '#8a5a00' },
+        { title: '2 parcels came back this week', sub: 'Put the bags back in stock once checked', cta: 'Review', href: 'AdminOrders.dc.html', bg: '#e8dccf', fg: '#292525' }
+      ],
+      orders: [
+        row('#BV-10234', 'Nusrat Jahan', '01712-XXXXXX', 'Dhaka', '৳ 2,770', 'To confirm', '10 min ago'),
+        row('#BV-10233', 'Farhana Akter', '01819-XXXXXX', 'Chattogram', '৳ 1,980', 'To confirm', '42 min ago'),
+        row('#BV-10232', 'Sadia Islam', '01556-XXXXXX', 'Dhaka', '৳ 1,520', 'Confirmed', '1 h ago'),
+        row('#BV-10229', 'Tania Rahman', '01911-XXXXXX', 'Gazipur', '৳ 2,280', 'Shipped', 'Yesterday'),
+        row('#BV-10225', 'Mim Chowdhury', '01678-XXXXXX', 'Sylhet', '৳ 1,120', 'Delivered', '27 Oct')
+      ],
+      low: [
+        { name: 'Quilted chain shoulder bag', colour: 'Burgundy', left: 2 },
+        { name: 'Mini zip crossbody', colour: 'Black', left: 1 },
+        { name: 'Pearl evening clutch', colour: 'Ivory', left: 2 }
+      ],
+      best: [
+        { rank: 1, name: 'Quilted chain shoulder bag', sold: 18 },
+        { rank: 2, name: 'Everyday canvas tote', sold: 11 },
+        { rank: 3, name: 'Mini zip crossbody', sold: 9 }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

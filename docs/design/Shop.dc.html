@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Bagvaly shop, mobile</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,400..700,0..100;1,9..144,400..700,0..100&amp;family=Manrope:wght@400;500;600;700&amp;family=Hind+Siliguri:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#fdf7eb}
+[style*="Fraunces"]{font-variation-settings:"SOFT" 100;font-optical-sizing:auto}
+*{box-sizing:border-box}
+a{color:#8a6a3e}a:hover{color:#5e0820}
+button,a{font-family:inherit}
+:focus-visible{outline:3px solid #b99a6b;outline-offset:2px}
+.bv-secondary{transition:background-color 150ms cubic-bezier(0.2,0.7,0.2,1)}
+.bv-secondary:hover{background:#f3e1e5 !important}
+.bv-scroll{scrollbar-width:none}.bv-scroll::-webkit-scrollbar{display:none}
+@media (prefers-reduced-motion: reduce){*{transition:none !important}}
+</style>
+</helmet>
+<div style="width: 390px; min-height: 2400px; display: flex; flex-direction: column; background: #fdf7eb; color: #292525; font-family: 'Manrope', 'Hind Siliguri', 'Noto Sans Bengali', system-ui, sans-serif; font-size: 16px; line-height: 1.6">
+
+<header style="height: 64px; display: flex; align-items: center; justify-content: space-between; padding: 0 8px; background: #fdf7eb; border-bottom: 1px solid #e8dccf">
+<div style="display: flex">
+<button aria-label="Open menu" style="width: 48px; height: 48px; border: 0; background: transparent; color: #292525; display: flex; align-items: center; justify-content: center; border-radius: 12px; cursor: pointer"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button>
+<button aria-label="Search" style="width: 48px; height: 48px; border: 0; background: transparent; color: #292525; display: flex; align-items: center; justify-content: center; border-radius: 12px; cursor: pointer"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="M20 20l-4.2-4.2"></path></svg></button>
+</div>
+<a href="Main.dc.html" aria-label="Bagvaly home" style="text-decoration: none; font-family: 'Fraunces', Georgia, serif; font-size: 26px; font-weight: 600; letter-spacing: 0.16em; color: #790b27; line-height: 1">BAGVALY</a>
+<div style="display: flex">
+<button aria-label="Wishlist" style="width: 48px; height: 48px; border: 0; background: transparent; color: #292525; display: flex; align-items: center; justify-content: center; border-radius: 12px; cursor: pointer"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"></path></svg></button>
+<a href="Cart.dc.html" aria-label="Cart, 2 items" style="position: relative; width: 48px; height: 48px; color: #292525; display: flex; align-items: center; justify-content: center; border-radius: 12px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"></path><path d="M9 8V7a3 3 0 0 1 6 0v1"></path></svg><span style="position: absolute; top: 6px; right: 4px; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 999px; background: #790b27; color: #fdf7eb; font-size: 12px; font-weight: 600; line-height: 18px; text-align: center">2</span></a>
+</div>
+</header>
+
+
+
+<div role="group" aria-label="Filter by style" class="bv-scroll" style="display: flex; gap: 8px; overflow-x: auto; padding: 12px 16px">
+<sc-for list="{{chips}}" as="c" hint-placeholder-count="6">
+<sc-if value="{{c.on}}" hint-placeholder-val="{{false}}">
+<button aria-pressed="true" onClick="{{c.pick}}" style="flex: 0 0 auto; height: 48px; padding: 0 20px; border-radius: 999px; border: 1.5px solid #790b27; background: #f3e1e5; color: #790b27; font-size: 16px; font-weight: 600; cursor: pointer">{{c.label}}</button>
+</sc-if>
+<sc-if value="{{c.off}}" hint-placeholder-val="{{true}}">
+<button aria-pressed="false" onClick="{{c.pick}}" style="flex: 0 0 auto; height: 48px; padding: 0 20px; border-radius: 999px; border: 1px solid #d6c5b1; background: #ffffff; color: #292525; font-size: 16px; font-weight: 500; cursor: pointer">{{c.label}}</button>
+</sc-if>
+</sc-for>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; padding: 4px 16px 16px">
+<button style="height: 48px; display: flex; align-items: center; justify-content: center; gap: 8px; border-radius: 12px; border: 1px solid #d6c5b1; background: #ffffff; color: #292525; font-size: 16px; font-weight: 500; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"></path><circle cx="16" cy="7" r="2"></circle><circle cx="10" cy="17" r="2"></circle></svg>Filter</button>
+<button style="height: 48px; display: flex; align-items: center; justify-content: center; gap: 8px; border-radius: 12px; border: 1px solid #d6c5b1; background: #ffffff; color: #292525; font-size: 16px; font-weight: 500; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4v16M4 17l3 3 3-3M17 20V4M14 7l3-3 3 3"></path></svg>Sort: Newest</button>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; padding: 0 16px">
+<sc-for list="{{products}}" as="p" hint-placeholder-count="6">
+<div style="position: relative; display: flex; flex-direction: column; background: #ffffff; border-radius: 20px; overflow: hidden; box-shadow: 0 1px 2px rgba(41, 37, 37, 0.06)">
+<a href="Product.dc.html" style="display: flex; flex-direction: column; text-decoration: none; color: #292525">
+<div role="img" aria-label="{{p.alt}}" style="position: relative; aspect-ratio: 4 / 5; background: #e8dccf; display: flex; align-items: center; justify-content: center; color: #8a6a3e">
+<svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"></path><path d="M9 8V7a3 3 0 0 1 6 0v1"></path></svg>
+<sc-if value="{{p.isNew}}" hint-placeholder-val="{{false}}"><span style="position: absolute; top: 10px; left: 10px; padding: 4px 10px; border-radius: 999px; background: #f3e1e5; color: #790b27; font-size: 12px; line-height: 1.35; font-weight: 600; letter-spacing: 0.12em">NEW</span></sc-if>
+<sc-if value="{{p.isSale}}" hint-placeholder-val="{{false}}"><span style="position: absolute; top: 10px; left: 10px; padding: 4px 10px; border-radius: 999px; background: #790b27; color: #fdf7eb; font-size: 12px; line-height: 1.35; font-weight: 600; letter-spacing: 0.12em">SALE</span></sc-if>
+<sc-if value="{{p.isSold}}" hint-placeholder-val="{{false}}"><span style="position: absolute; top: 10px; left: 10px; padding: 4px 10px; border-radius: 999px; background: #e8dccf; color: #292525; border: 1px solid #d6c5b1; font-size: 12px; line-height: 1.35; font-weight: 600; letter-spacing: 0.12em">SOLD OUT</span></sc-if>
+</div>
+<div style="padding: 12px; display: flex; flex-direction: column; gap: 4px">
+<span style="font-size: 18px; line-height: 1.35; font-weight: 500; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden">{{p.name}}</span>
+<div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 8px">
+<span style="font-size: 16px; font-weight: 600">{{p.price}}</span>
+<sc-if value="{{p.was}}" hint-placeholder-val="{{false}}"><span style="font-size: 14px; color: #6b6260; text-decoration: line-through">{{p.was}}</span><span style="font-size: 14px; font-weight: 600; color: #8a6a3e">{{p.off}}</span></sc-if>
+</div>
+<span style="font-size: 14px; color: #6b6260">{{p.colours}}</span>
+</div>
+</a>
+<button aria-label="Save to wishlist" style="position: absolute; top: 8px; right: 8px; width: 40px; height: 40px; border-radius: 999px; border: 0; background: #ffffff; color: #292525; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 1px 2px rgba(41, 37, 37, 0.06)"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"></path></svg></button>
+</div>
+</sc-for>
+</div>
+
+<div style="padding: 32px 16px 48px; display: flex; flex-direction: column; align-items: center; gap: 12px">
+<span style="font-size: 14px; color: #6b6260">Showing 6 of {{count}}</span>
+<button class="bv-secondary" style="width: 100%; height: 48px; border-radius: 12px; border: 1.5px solid #790b27; background: transparent; color: #790b27; font-size: 16px; font-weight: 600; cursor: pointer">Load more bags</button>
+</div>
+
+<footer style="margin-top: auto; background: #790b27; color: #fdf7eb; padding: 32px 16px; display: flex; flex-direction: column; gap: 8px">
+<span style="font-family: 'Fraunces', Georgia, serif; font-size: 24px; font-weight: 600; letter-spacing: 0.16em; line-height: 1">BAGVALY</span>
+<span style="font-size: 14px">Same footer as Home</span>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":2400}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { pick: 'all' }; }
+  renderVals() {
+    const defs = [
+      { id: 'all', label: 'All bags', title: 'All bags', count: 48 },
+      { id: 'shoulder', label: 'Shoulder', title: 'Shoulder bags', count: 14 },
+      { id: 'tote', label: 'Tote', title: 'Tote bags', count: 9 },
+      { id: 'crossbody', label: 'Crossbody', title: 'Crossbody bags', count: 11 },
+      { id: 'clutch', label: 'Clutch', title: 'Clutches', count: 6 },
+      { id: 'tophandle', label: 'Top-handle', title: 'Top-handle bags', count: 8 }
+    ];
+    const cur = defs.find((d) => d.id === this.state.pick) || defs[0];
+    return {
+      title: cur.title,
+      count: cur.count,
+      chips: defs.map((d) => ({ label: d.label, on: d.id === cur.id, off: d.id !== cur.id, pick: () => this.setState({ pick: d.id }) })),
+      products: [
+        { name: 'Quilted chain shoulder bag', price: '৳ 1,450', was: '', off: '', colours: '4 colours', isNew: true, isSale: false, isSold: false, alt: 'Burgundy quilted shoulder bag with gold chain' },
+        { name: 'Everyday canvas tote', price: '৳ 1,850', was: '', off: '', colours: '3 colours', isNew: false, isSale: false, isSold: false, alt: 'Ivory canvas tote bag with leather handles' },
+        { name: 'Mini zip crossbody', price: '৳ 1,250', was: '৳ 1,550', off: '19% off', colours: '2 colours', isNew: false, isSale: true, isSold: false, alt: 'Black mini crossbody bag with zip pocket' },
+        { name: 'Structured top-handle bag', price: '৳ 2,150', was: '', off: '', colours: '3 colours', isNew: true, isSale: false, isSold: false, alt: 'Tan structured top-handle bag with gold clasp' },
+        { name: 'Pearl evening clutch', price: '৳ 990', was: '', off: '', colours: '2 colours', isNew: false, isSale: false, isSold: true, alt: 'Ivory evening clutch with pearl clasp' },
+        { name: 'Woven bucket bag', price: '৳ 1,650', was: '', off: '', colours: '2 colours', isNew: false, isSale: false, isSold: false, alt: 'Sand woven bucket bag with drawstring' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

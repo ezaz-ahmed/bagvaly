@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Bagvaly admin order detail</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,400..700,0..100;1,9..144,400..700,0..100&amp;family=Manrope:wght@400;500;600;700&amp;family=Hind+Siliguri:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#fdf7eb}
+[style*="Fraunces"]{font-variation-settings:"SOFT" 100;font-optical-sizing:auto}
+*{box-sizing:border-box}
+a{color:#8a6a3e}a:hover{color:#5e0820}
+button,a,input,select,textarea{font-family:inherit}
+:focus-visible{outline:3px solid #b99a6b;outline-offset:2px}
+input:focus,select:focus,textarea:focus{outline:3px solid #b99a6b;outline-offset:2px}
+.bv-primary,.bv-secondary{transition:background-color 150ms cubic-bezier(0.2,0.7,0.2,1)}
+.bv-primary:hover{background:#5e0820 !important;color:#fdf7eb !important}
+.bv-secondary:hover{background:#f3e1e5 !important}
+.bv-side a{transition:background-color 150ms cubic-bezier(0.2,0.7,0.2,1)}
+.bv-side a:hover{background:#fdf7eb}
+.bv-side a[aria-current="page"]:hover{background:#f3e1e5}
+@media (prefers-reduced-motion: reduce){*{transition:none !important}}
+</style>
+</helmet>
+<div style="width: 100%; min-height: 1700px; display: flex; flex-wrap: wrap; background: #fdf7eb; color: #292525; font-family: 'Manrope', 'Hind Siliguri', 'Noto Sans Bengali', system-ui, sans-serif; font-size: 16px; line-height: 1.6">
+
+<aside class="bv-side" style="flex: 1 1 232px; background: #ffffff; border-right: 1px solid #e8dccf; padding: 24px 16px; display: flex; flex-direction: column; gap: 24px">
+<div style="display: flex; align-items: baseline; gap: 10px; padding: 0 12px">
+<span style="font-family: 'Fraunces', Georgia, serif; font-size: 26px; font-weight: 600; letter-spacing: 0.16em; color: #790b27; line-height: 1">BAGVALY</span>
+<span style="font-size: 12px; font-weight: 600; letter-spacing: 0.12em; color: #8a6a3e">ADMIN</span>
+</div>
+<nav aria-label="Admin" style="display: flex; flex-direction: column; gap: 4px">
+<a href="AdminDashboard.dc.html" style="min-height: 48px; padding: 0 12px; display: flex; align-items: center; gap: 12px; border-radius: 12px; color: #292525; font-weight: 500; text-decoration: none"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"></path></svg>Dashboard</a>
+<a href="AdminOrders.dc.html" aria-current="page" style="min-height: 48px; padding: 0 12px; display: flex; align-items: center; gap: 12px; border-radius: 12px; background: #f3e1e5; color: #790b27; font-weight: 600; text-decoration: none"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7l8-4 8 4v10l-8 4-8-4z"></path><path d="M4 7l8 4 8-4M12 11v10"></path></svg><span style="flex: 1">Orders</span><span style="min-width: 24px; height: 24px; padding: 0 8px; border-radius: 999px; background: #790b27; color: #fdf7eb; font-size: 12px; font-weight: 600; line-height: 24px; text-align: center">6</span></a>
+<a href="AdminProducts.dc.html" style="min-height: 48px; padding: 0 12px; display: flex; align-items: center; gap: 12px; border-radius: 12px; color: #292525; font-weight: 500; text-decoration: none"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"></path><path d="M9 8V7a3 3 0 0 1 6 0v1"></path></svg>Products</a>
+<a href="#" style="min-height: 48px; padding: 0 12px; display: flex; align-items: center; gap: 12px; border-radius: 12px; color: #292525; font-weight: 500; text-decoration: none"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"></circle><path d="M3 20a6 6 0 0 1 12 0M16 4.5a3.5 3.5 0 0 1 0 7M17 14a6 6 0 0 1 4 6"></path></svg>Customers</a>
+<a href="#" style="min-height: 48px; padding: 0 12px; display: flex; align-items: center; gap: 12px; border-radius: 12px; color: #292525; font-weight: 500; text-decoration: none"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h11v10H3zM14 9h4l3 3.5V16h-7"></path><circle cx="7.5" cy="17.5" r="1.75"></circle><circle cx="17.5" cy="17.5" r="1.75"></circle></svg>Delivery and couriers</a>
+<a href="#" style="min-height: 48px; padding: 0 12px; display: flex; align-items: center; gap: 12px; border-radius: 12px; color: #292525; font-weight: 500; text-decoration: none"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 7h10M18 7h2M4 17h4M12 17h8"></path><circle cx="16" cy="7" r="2"></circle><circle cx="10" cy="17" r="2"></circle></svg>Settings</a>
+</nav>
+<div style="margin-top: auto; display: flex; flex-direction: column; gap: 12px; padding: 0 12px">
+<a href="HomeDesktop.dc.html" style="min-height: 44px; display: flex; align-items: center; gap: 8px; font-weight: 600; text-decoration: none">View store <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"></path></svg></a>
+<div style="display: flex; align-items: center; gap: 10px; padding-top: 12px; border-top: 1px solid #e8dccf">
+<span style="width: 36px; height: 36px; border-radius: 999px; background: #790b27; color: #fdf7eb; font-weight: 600; display: flex; align-items: center; justify-content: center">E</span>
+<span style="display: flex; flex-direction: column; line-height: 1.35"><span style="font-weight: 600">Ezaz</span><span style="font-size: 14px; color: #6b6260">Owner</span></span>
+</div>
+</div>
+</aside>
+
+<main style="flex: 999 1 560px; min-width: 0; padding: 32px; display: flex; flex-direction: column; gap: 24px">
+<a href="AdminOrders.dc.html" style="align-self: flex-start; min-height: 44px; display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; text-decoration: none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6"></path></svg>All orders</a>
+
+<div style="display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 16px; margin-top: -12px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px">
+<h1 style="margin: 0; font-family: 'Fraunces', 'Hind Siliguri', Georgia, serif; font-size: 36px; line-height: 1.15; font-weight: 600; letter-spacing: -0.005em">Order #BV-10234</h1>
+<span style="display: inline-flex; align-items: center; gap: 6px; padding: 2px 12px; border-radius: 999px; background: {{bg}}; color: {{fg}}; border: 1px solid {{bd}}; font-size: 14px; font-weight: 600"><span style="width: 6px; height: 6px; border-radius: 999px; background: currentColor"></span>{{status}}</span>
+</div>
+<span style="font-size: 14px; color: #6b6260">Placed on the website · Thursday 29 Oct, 11:32 am</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<button style="height: 48px; padding: 0 16px; display: flex; align-items: center; gap: 8px; border-radius: 12px; border: 1px solid #d6c5b1; background: #ffffff; color: #292525; font-size: 16px; font-weight: 500; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 9V3h10v6M7 17H4v-7h16v7h-3M7 14h10v7H7z"></path></svg>Print invoice</button>
+<sc-if value="{{canCancel}}" hint-placeholder-val="{{true}}"><button class="bv-secondary" style="height: 48px; padding: 0 16px; border-radius: 12px; border: 1.5px solid #a8281f; background: transparent; color: #a8281f; font-size: 16px; font-weight: 600; cursor: pointer">Cancel order</button></sc-if>
+<sc-if value="{{hasNext}}" hint-placeholder-val="{{true}}"><button class="bv-primary" onClick="{{advance}}" style="height: 48px; padding: 0 20px; border-radius: 12px; border: 0; background: #790b27; color: #fdf7eb; font-size: 16px; font-weight: 600; cursor: pointer">{{nextLabel}}</button></sc-if>
+</div>
+</div>
+
+<ol aria-label="Order progress" style="margin: 0; padding: 20px; list-style: none; background: #ffffff; border: 1px solid #d6c5b1; border-radius: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px">
+<sc-for list="{{steps}}" as="s" hint-placeholder-count="5">
+<li style="display: flex; align-items: center; gap: 10px">
+<sc-if value="{{s.done}}" hint-placeholder-val="{{false}}"><span style="flex: 0 0 auto; width: 32px; height: 32px; border-radius: 999px; background: #790b27; color: #fdf7eb; display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"></path></svg></span></sc-if>
+<sc-if value="{{s.current}}" hint-placeholder-val="{{false}}"><span style="flex: 0 0 auto; width: 32px; height: 32px; border-radius: 999px; border: 2px solid #790b27; background: #f3e1e5; color: #790b27; font-size: 14px; font-weight: 600; display: flex; align-items: center; justify-content: center">{{s.n}}</span></sc-if>
+<sc-if value="{{s.todo}}" hint-placeholder-val="{{true}}"><span style="flex: 0 0 auto; width: 32px; height: 32px; border-radius: 999px; border: 1px solid #d6c5b1; color: #6b6260; font-size: 14px; font-weight: 600; display: flex; align-items: center; justify-content: center">{{s.n}}</span></sc-if>
+<span style="display: flex; flex-direction: column; line-height: 1.35"><span style="font-weight: 600">{{s.label}}</span><span style="font-size: 14px; color: #6b6260">{{s.note}}</span></span>
+</li>
+</sc-for>
+</ol>
+
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start">
+<div style="flex: 999 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+
+<section aria-labelledby="it-h" style="background: #ffffff; border: 1px solid #d6c5b1; border-radius: 20px; padding: 20px; display: flex; flex-direction: column; gap: 4px">
+<h2 id="it-h" style="margin: 0 0 8px; font-family: 'Fraunces', 'Hind Siliguri', Georgia, serif; font-size: 22px; line-height: 1.15; font-weight: 600">Items</h2>
+<div style="display: flex; gap: 14px; align-items: center; padding: 12px 0; border-top: 1px solid #e8dccf">
+<span role="img" aria-label="Burgundy quilted shoulder bag" style="flex: 0 0 auto; width: 56px; height: 70px; border-radius: 6px; background: #e8dccf"></span>
+<span style="flex: 1; min-width: 0; line-height: 1.35"><a href="AdminProductEdit.dc.html" style="display: block; color: #292525; font-weight: 600; text-decoration: none">Quilted chain shoulder bag</a><span style="font-size: 14px; color: #6b6260">Burgundy · SKU BV-QCS-BUR · 2 left after this</span></span>
+<span style="color: #6b6260">× 1</span><span style="width: 88px; text-align: right; font-weight: 600">৳ 1,450</span>
+</div>
+<div style="display: flex; gap: 14px; align-items: center; padding: 12px 0; border-top: 1px solid #e8dccf">
+<span role="img" aria-label="Black mini crossbody bag" style="flex: 0 0 auto; width: 56px; height: 70px; border-radius: 6px; background: #e8dccf"></span>
+<span style="flex: 1; min-width: 0; line-height: 1.35"><a href="AdminProductEdit.dc.html" style="display: block; color: #292525; font-weight: 600; text-decoration: none">Mini zip crossbody</a><span style="font-size: 14px; color: #6b6260">Black · SKU BV-MZC-BLK · 1 left after this</span></span>
+<span style="color: #6b6260">× 1</span><span style="width: 88px; text-align: right; font-weight: 600">৳ 1,250</span>
+</div>
+<div style="border-top: 1px solid #e8dccf; padding-top: 12px; display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; justify-content: space-between"><span>Subtotal</span><span>৳ 2,700</span></div>
+<div style="display: flex; justify-content: space-between"><span>Delivery · inside Dhaka</span><span>৳ 70</span></div>
+<div style="display: flex; justify-content: space-between; border-top: 1px solid #292525; padding-top: 10px; margin-top: 4px; font-size: 18px; font-weight: 600"><span>Cash to collect</span><span>৳ 2,770</span></div>
+</div>
+</section>
+
+<section aria-labelledby="act-h" style="background: #ffffff; border: 1px solid #d6c5b1; border-radius: 20px; padding: 20px; display: flex; flex-direction: column; gap: 16px">
+<h2 id="act-h" style="margin: 0; font-family: 'Fraunces', 'Hind Siliguri', Georgia, serif; font-size: 22px; line-height: 1.15; font-weight: 600">Activity</h2>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="ord-note" style="font-weight: 600">Add a private note</label>
+<textarea id="ord-note" rows="2" placeholder="Called at 12:10, asked to deliver after 5 pm…" style="padding: 12px 14px; border: 1px solid #d6c5b1; border-radius: 6px; background: #ffffff; color: #292525; font-size: 16px; line-height: 1.6; resize: vertical"></textarea>
+</div>
+<ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column">
+<sc-for list="{{log}}" as="l" hint-placeholder-count="4">
+<li style="display: flex; gap: 12px; padding: 10px 0; border-top: 1px solid #e8dccf">
+<span style="flex: 0 0 auto; width: 8px; height: 8px; margin-top: 9px; border-radius: 999px; background: #b99a6b"></span>
+<span style="flex: 1">{{l.text}}</span>
+<span style="font-size: 14px; color: #6b6260; white-space: nowrap">{{l.when}}</span>
+</li>
+</sc-for>
+</ol>
+</section>
+</div>
+
+<div style="flex: 1 1 320px; min-width: 0; display: flex; flex-direction: column; gap: 24px">
+<section aria-labelledby="cu-h" style="background: #ffffff; border: 1px solid #d6c5b1; border-radius: 20px; padding: 20px; display: flex; flex-direction: column; gap: 12px">
+<h2 id="cu-h" style="margin: 0; font-family: 'Fraunces', 'Hind Siliguri', Georgia, serif; font-size: 22px; line-height: 1.15; font-weight: 600">Customer</h2>
+<div style="line-height: 1.35"><span style="display: block; font-weight: 600; font-size: 18px">Nusrat Jahan</span><span style="color: #6b6260">01712-XXXXXX</span></div>
+<div style="display: flex; gap: 8px">
+<a href="tel:01712XXXXXX" class="bv-primary" style="flex: 1; height: 48px; display: flex; align-items: center; justify-content: center; gap: 8px; border-radius: 12px; background: #790b27; color: #fdf7eb; text-decoration: none; font-weight: 600"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6.5 3.5h3l1.5 4-2 1.5a11 11 0 0 0 6 6l1.5-2 4 1.5v3a2 2 0 0 1-2 2A16 16 0 0 1 4.5 5.5a2 2 0 0 1 2-2z"></path></svg>Call</a>
+<a href="https://wa.me/8801712XXXXXX" class="bv-secondary" style="flex: 1; height: 48px; display: flex; align-items: center; justify-content: center; gap: 8px; border-radius: 12px; border: 1.5px solid #790b27; color: #790b27; text-decoration: none; font-weight: 600"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"></path></svg>WhatsApp</a>
+</div>
+<div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; text-align: center">
+<div style="padding: 8px; border-radius: 12px; background: #fdf7eb"><span style="display: block; font-weight: 600; font-size: 18px">3</span><span style="font-size: 14px; color: #6b6260">Orders</span></div>
+<div style="padding: 8px; border-radius: 12px; background: #fdf7eb"><span style="display: block; font-weight: 600; font-size: 18px">2</span><span style="font-size: 14px; color: #6b6260">Delivered</span></div>
+<div style="padding: 8px; border-radius: 12px; background: #e3f0e9"><span style="display: block; font-weight: 600; font-size: 18px; color: #2e6b4e">0</span><span style="font-size: 14px; color: #2e6b4e">Returns</span></div>
+</div>
+</section>
+
+<section aria-labelledby="ad-h" style="background: #ffffff; border: 1px solid #d6c5b1; border-radius: 20px; padding: 20px; display: flex; flex-direction: column; gap: 8px">
+<div style="display: flex; justify-content: space-between; align-items: center"><h2 id="ad-h" style="margin: 0; font-family: 'Fraunces', 'Hind Siliguri', Georgia, serif; font-size: 22px; line-height: 1.15; font-weight: 600">Delivery address</h2><button style="height: 44px; padding: 0 8px; border: 0; background: transparent; color: #8a6a3e; font-size: 14px; font-weight: 600; cursor: pointer">Edit</button></div>
+<p style="margin: 0">House 12, Road 7, Block C<br>Mirpur 10, Dhaka</p>
+<p style="margin: 0; font-size: 14px; color: #6b6260">Landmark: near Mirpur 10 metro station</p>
+<div style="padding: 10px 12px; border-radius: 12px; background: #fdf7eb; font-size: 14px"><span style="font-weight: 600">Customer note:</span> Please call before coming.</div>
+</section>
+
+<section aria-labelledby="co-h" style="background: #ffffff; border: 1px solid #d6c5b1; border-radius: 20px; padding: 20px; display: flex; flex-direction: column; gap: 12px">
+<h2 id="co-h" style="margin: 0; font-family: 'Fraunces', 'Hind Siliguri', Georgia, serif; font-size: 22px; line-height: 1.15; font-weight: 600">Courier</h2>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="co-courier" style="font-weight: 600">Courier</label>
+<select id="co-courier" style="height: 48px; padding: 0 12px; border: 1px solid #d6c5b1; border-radius: 6px; background: #ffffff; color: #292525; font-size: 16px"><option>Choose a courier</option><option>Steadfast</option><option>Pathao</option><option>RedX</option><option>Own rider</option></select>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<label for="co-cn" style="font-weight: 600">Consignment ID <span style="font-weight: 400; color: #6b6260">(optional)</span></label>
+<input id="co-cn" placeholder="Filled in when you book" style="height: 48px; padding: 0 14px; border: 1px solid #d6c5b1; border-radius: 6px; background: #ffffff; color: #292525; font-size: 16px">
+</div>
+<p style="margin: 0; font-size: 14px; color: #6b6260">The customer gets the tracking link by SMS and WhatsApp when the order ships.</p>
+</section>
+
+<section aria-labelledby="pay-h" style="background: #ffffff; border: 1px solid #d6c5b1; border-radius: 20px; padding: 20px; display: flex; flex-direction: column; gap: 8px">
+<h2 id="pay-h" style="margin: 0; font-family: 'Fraunces', 'Hind Siliguri', Georgia, serif; font-size: 22px; line-height: 1.15; font-weight: 600">Payment</h2>
+<div style="display: flex; justify-content: space-between"><span>Method</span><span style="font-weight: 600">Cash on delivery</span></div>
+<div style="display: flex; justify-content: space-between; align-items: center"><span>Collected</span>
+<sc-if value="{{paid}}" hint-placeholder-val="{{false}}"><span style="padding: 2px 10px; border-radius: 999px; background: #e3f0e9; color: #2e6b4e; font-size: 14px; font-weight: 600">৳ 2,770 received</span></sc-if>
+<sc-if value="{{unpaid}}" hint-placeholder-val="{{true}}"><span style="font-weight: 600; color: #6b6260">Not yet</span></sc-if>
+</div>
+</section>
+</div>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1700}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { stage: 0 }; }
+  renderVals() {
+    const stage = this.state.stage;
+    const steps = [
+      { label: 'Placed', note: '29 Oct, 11:32 am', status: 'To confirm', next: 'Mark as confirmed' },
+      { label: 'Confirmed', note: 'After the call', status: 'Confirmed', next: 'Mark as packed' },
+      { label: 'Packed', note: 'Ready to hand over', status: 'Packed', next: 'Send to courier' },
+      { label: 'Shipped', note: 'With courier', status: 'Shipped', next: 'Mark delivered and paid' },
+      { label: 'Delivered', note: 'Cash collected', status: 'Delivered', next: '' }
+    ];
+    const S = {
+      'To confirm': ['#fbf0d9', '#8a5a00', '#fbf0d9'],
+      'Confirmed': ['#f3e1e5', '#790b27', '#f3e1e5'],
+      'Packed': ['#e8dccf', '#292525', '#e8dccf'],
+      'Shipped': ['#ffffff', '#292525', '#d6c5b1'],
+      'Delivered': ['#e3f0e9', '#2e6b4e', '#e3f0e9']
+    };
+    const cur = steps[stage];
+    const baseLog = [
+      { text: 'WhatsApp alert sent to the shop number', when: '11:32 am' },
+      { text: 'Order confirmation SMS sent to the customer', when: '11:32 am' },
+      { text: 'Order placed on the website · cash on delivery', when: '11:32 am' }
+    ];
+    const extra = steps.slice(1, stage + 1).reverse().map((s) => ({ text: 'Status changed to ' + s.status + ' by Ezaz', when: 'Just now' }));
+    return {
+      status: cur.status,
+      bg: S[cur.status][0], fg: S[cur.status][1], bd: S[cur.status][2],
+      hasNext: !!cur.next,
+      nextLabel: cur.next,
+      canCancel: stage < 3,
+      advance: () => this.setState({ stage: Math.min(4, stage + 1) }),
+      paid: stage === 4,
+      unpaid: stage !== 4,
+      steps: steps.map((s, i) => ({ label: s.label, note: s.note, n: i + 1, done: i < stage || (i === 4 && stage === 4), current: i === stage && stage !== 4, todo: i > stage })),
+      log: extra.concat(baseLog)
+    };
+  }
+}
+</script>
+</body>
+</html>
