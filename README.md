@@ -75,6 +75,25 @@ refuses to send OTPs until a gateway adapter is added in `src/lib/server/provide
 Lint and format rules live in the `lint` and `fmt` sections of [vite.config.ts](vite.config.ts).
 Before handing off a change, run `vp run check`, `vp run lint` and `vp test --run`.
 
+### Secret scanning
+
+CI runs [Gitleaks](https://github.com/gitleaks/gitleaks) over the full Git history on every push
+and pull request ([.github/workflows/secret-scan.yml](.github/workflows/secret-scan.yml)) and
+fails on any finding. Values are redacted in the log. To run the same scan locally, install
+Gitleaks 8.30.1 (release binary, `brew install gitleaks`, or Docker) and run, from the repo root:
+
+```sh
+gitleaks git --redact .                       # full history, as in CI
+gitleaks git --pre-commit --staged --redact . # only what you are about to commit
+```
+
+`gitleaks dir .` also reads ignored files such as `.env`, so a finding there is expected and not
+a leak. [.gitleaksignore](.gitleaksignore) lists the only accepted findings by fingerprint (commit,
+file, rule, line). Add an entry only for a confirmed false positive, with a comment explaining it.
+A real secret must be removed and rotated, not ignored. The one exception is a temporary entry for
+an already-public historical Supabase `anon` key, which must be removed once the old project is
+deleted or its JWT secret is rotated.
+
 ## Project layout
 
 ```text

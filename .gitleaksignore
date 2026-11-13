@@ -1,0 +1,14 @@
+# Accepted findings only, pinned to one commit/file/rule/line each (no secret values here).
+# Any other finding, including these keys appearing anywhere else, still fails the scan.
+# Both come from commit 31fe87a (2023-06-13, pre-rewrite Supabase prototype), removed in 4f5036f.
+
+# FALSE POSITIVE: Supabase local-dev demo `anon` key (issuer "supabase-demo", localhost URL),
+# published by Supabase for every local install.
+31fe87a0000ae0f7e609d128d677d54202a11033:.env:jwt:2
+
+# TEMPORARY EXCEPTION, NOT A FALSE POSITIVE: a real Supabase project `anon` key (browser-public
+# role, not service_role) that has been public in this repository's history since 2023.
+# Ignored only so CI can run while the owner acts on the old Supabase project.
+# REMOVE THIS ENTRY once that project is deleted or its JWT secret is rotated
+# (see docs/decisions.md, 2026-11-13 "Gitleaks secret scan in CI").
+31fe87a0000ae0f7e609d128d677d54202a11033:.env.production:jwt:2

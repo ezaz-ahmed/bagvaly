@@ -2,6 +2,16 @@
 
 Short record of significant decisions and why they were made. Newest first.
 
+## 2026-11-13: Gitleaks secret scan in CI
+
+A GitHub Actions workflow runs Gitleaks (pinned release, checksum-verified, no project
+dependency) over the full history on every push and pull request, with values redacted.
+`.gitleaksignore` holds two fingerprinted findings from commit `31fe87a` (2023 Supabase
+prototype). The first is a false positive: Supabase's public local-demo key. The second is a
+temporary exception, not a false positive: a real Supabase project `anon` key that is already
+public in history. Rewriting history would not un-publish it. The owner must delete that Supabase
+project or rotate its JWT secret, and the exception must then be removed.
+
 ## 2026-10-31: Worker types are generated, not committed
 
 `wrangler types` adds a `mainModule` type when the build output exists, so the file differs
