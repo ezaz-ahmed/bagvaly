@@ -2,6 +2,34 @@
 
 Short record of significant decisions and why they were made. Newest first.
 
+## 2026-11-13: Orders, customers and atomic order creation
+
+Approved schema from issue #61: `customers` (one per canonical phone, blocking, order/delivered/
+returned counts), `orders`, `order_items` and `order_events`. No `packed` status: the lifecycle
+stays as in `AGENTS.md`, enforced by `changeStatus()` in `src/lib/server/orders/status.ts`. One
+order line holds at most `MAX_QTY_PER_LINE` = 5. Items snapshot the product and colour names (both
+languages) and the unit price; their product/variant links become NULL if those are deleted.
+`hidden` products can be ordered (they are only left off listings); `draft` ones cannot.
+
+D1 has no interactive transactions (Drizzle's `db.transaction()` sends `BEGIN`, which D1
+rejects), but `db.batch()` passes straight to `D1Database.batch()`, which runs the statements as
+one SQL transaction: if any statement fails, the whole batch rolls back (Cloudflare D1 docs;
+Miniflare runs it inside `storage.transaction()`; covered by a test). A statement that changes 0
+rows does not fail, so the guards are constraint violations instead:
+
+- `createOrder()` reads prices and stock, then writes customer upsert, order, items, first event
+  and `stock = stock - qty` in one batch. `CHECK (stock >= 0)` fails the batch if another order
+  took the stock in between, so two orders for the last unit give exactly one order.
+- `changeStatus()` writes the event first, with `order_id` taken from
+  `SELECT id FROM orders WHERE id = ? AND status = <from>`. If the status changed meanwhile it is
+  NULL, the NOT NULL constraint fails and nothing (status, restock, counters) is written.
+- Statements reference the new order by its unique `idempotency_key`, never by an id read earlier.
+  A duplicate key fails the batch and the existing order is returned.
+
+Order numbers are `BV-` + (10000 + max order id + 1), computed inside the insert. D1 serialises
+writes, so this cannot race, and the column is UNIQUE as a backstop. Orders must never be deleted
+(a deleted newest order would let its number be reused).
+
 ## 2026-11-13: Catalogue schema
 
 Approved schema from issue #60: `categories`, `products`, `product_variants` (one row per colour,
