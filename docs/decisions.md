@@ -2,6 +2,28 @@
 
 Short record of significant decisions and why they were made. Newest first.
 
+## 2026-11-13: Edge cache for public pages and purge by URL
+
+Approved in issue #62. `cachedPublic()` in `src/lib/server/cache.ts` (or the `publicCacheHandle()`
+hook for a list of public route IDs) stores public pages in `caches.default`, keyed by the full
+URL, so each locale (`/`, `/bn/`) and query string is its own entry. TTL is 5 minutes
+(`s-maxage=300`, which browsers ignore, so a purge reaches shoppers). It only caches GET requests
+without a Better Auth cookie or `Authorization`, and only 200 responses without `Set-Cookie` or
+`Cache-Control: private/no-store`. It is a pass-through in dev and while prerendering. Pages
+built from catalogue queries show `inStock` booleans only, never stock counts.
+
+`cache.delete()` only clears the current data center, so invalidation uses Cloudflare's
+purge-by-URL API (`src/lib/server/providers/cloudflare/purge.ts`), which also clears Cache API
+entries on the zone's custom domain (not `workers.dev`). `affectedUrls()` lists home, `/shop`,
+`/shop?category=` and `/bags/<slug>` in both locales. Other sorts and later pages expire after the
+TTL. Requests send at most 100 URLs, the documented per-request limit on Free/Pro/Business plans.
+`CACHE_PURGE_TOKEN` (an API token with only Zone > Cache Purge) is a secret in
+`secrets.required` for production and staging. `CACHE_PURGE_ZONE_ID` is a Worker var, because a
+zone ID is an identifier, not a credential, and it differs per environment. Both are empty
+locally. Purging is skipped in dev, and a deployed Worker without them logs a warning and
+returns `false` instead of claiming to purge. Admin edits will call `purgeUrls(affectedUrls(...))`
+once the admin exists.
+
 ## 2026-11-13: Orders, customers and atomic order creation
 
 Approved schema from issue #61: `customers` (one per canonical phone, blocking, order/delivered/

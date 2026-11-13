@@ -17,5 +17,21 @@ export const variables = defineEnvVars({
 				throw new Error('BETTER_AUTH_SECRET must be at least 32 characters');
 			return value;
 		}
+	},
+	// Both empty locally: purging is skipped in dev, and a deployed Worker without them logs a warning
+	// instead of purging (src/lib/server/providers/cloudflare/purge.ts).
+	CACHE_PURGE_ZONE_ID: {
+		description:
+			'Cloudflare zone ID of the site domain, for purging cached pages by URL. Not secret; a Worker var.',
+		schema: (value) => {
+			if (value && !/^[0-9a-f]{32}$/.test(value))
+				throw new Error('CACHE_PURGE_ZONE_ID must be a 32-character hex zone ID');
+			return value ?? '';
+		}
+	},
+	CACHE_PURGE_TOKEN: {
+		description:
+			'Cloudflare API token with only the Zone > Cache Purge permission on that zone. Secret.',
+		schema: (value) => value ?? ''
 	}
 });

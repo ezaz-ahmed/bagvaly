@@ -31,12 +31,14 @@
 	// Empty on purpose: ORIGIN fails validation, so the Worker refuses requests until the real
 	// origin is set. Locally, `.env` overrides this value.
 	"vars": {
-		"ORIGIN": ""
+		"ORIGIN": "",
+		// Zone of the custom domain, for cache purges (not secret). Empty: purges are skipped with a warning.
+		"CACHE_PURGE_ZONE_ID": ""
 	},
 	// Only these keys from `.env` (plus `vars`) reach the local Worker, so tooling credentials
 	// such as CLOUDFLARE_D1_TOKEN stay out of it. Set deployed values with `wrangler secret put`.
 	"secrets": {
-		"required": ["BETTER_AUTH_SECRET"]
+		"required": ["BETTER_AUTH_SECRET", "CACHE_PURGE_TOKEN"]
 	},
 	"workers_dev": true,
 	"preview_urls": true,
@@ -61,10 +63,11 @@
 				}
 			],
 			"vars": {
-				"ORIGIN": ""
+				"ORIGIN": "",
+				"CACHE_PURGE_ZONE_ID": ""
 			},
 			"secrets": {
-				"required": ["BETTER_AUTH_SECRET"]
+				"required": ["BETTER_AUTH_SECRET", "CACHE_PURGE_TOKEN"]
 			}
 		}
 	}
