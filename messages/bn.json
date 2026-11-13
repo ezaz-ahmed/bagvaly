@@ -1,5 +1,17 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
 	"site_name": "ব্যাগভ্যালি",
-	"home_tagline": "প্রতিদিনের আভিজাত্য, পৌঁছে যাবে আপনার দোরগোড়ায়।"
+	"home_tagline": "প্রতিদিনের আভিজাত্য, পৌঁছে যাবে আপনার দোরগোড়ায়।",
+	"ui_loading": "লোড হচ্ছে",
+	"ui_badge_new": "নতুন",
+	"ui_badge_sale": "সেল",
+	"ui_badge_best_seller": "বেস্ট সেলার",
+	"ui_badge_sold_out": "স্টক শেষ",
+	"ui_price_regular": "নিয়মিত দাম",
+	"ui_percent_off": "{percent}% ছাড়",
+	"ui_optional": "(ঐচ্ছিক)",
+	"ui_quantity": "পরিমাণ",
+	"ui_quantity_decrease": "পরিমাণ কমান",
+	"ui_quantity_increase": "পরিমাণ বাড়ান",
+	"ui_dismiss": "বন্ধ করুন"
 }

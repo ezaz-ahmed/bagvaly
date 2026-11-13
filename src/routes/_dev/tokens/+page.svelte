@@ -1,5 +1,24 @@
 <!-- Dev-only QA page (guarded in +page.server.ts); labels are intentionally not localized. -->
 <script lang="ts">
+	import {
+		Badge,
+		Button,
+		FilterChip,
+		FilterChipRow,
+		Icon,
+		Price,
+		QuantityStepper,
+		Select,
+		StatusPill,
+		TextArea,
+		TextField,
+		Toast
+	} from '#lib/components/ui/index.ts';
+	import { iconNames } from '#lib/components/ui/Icon.svelte';
+
+	let quantity = $state(1);
+	let chip = $state('Tote');
+	let toast = $state<'success' | 'error' | null>(null);
 	const colors = [
 		'bg-burgundy-600',
 		'bg-burgundy-700',
@@ -64,5 +83,80 @@
 		<input class="min-h-tap rounded-sm border-sand-300 bg-card" placeholder="Input" />
 		<span class="rounded-pill bg-rose-50 px-3 py-1 text-sm text-burgundy-600">Pill</span>
 		<div class="h-header w-32 rounded-lg bg-card shadow-lg"></div>
+	</section>
+
+	<h2 class="text-2xl">Primitives</h2>
+
+	<section class="flex flex-wrap items-center gap-3">
+		<Button>Add to cart</Button>
+		<Button variant="secondary">View details</Button>
+		<Button variant="ghost">Remove</Button>
+		<Button variant="danger-outline">Cancel order</Button>
+		<Button size="lg" href="#top">Link, large</Button>
+		<Button loading>Place order</Button>
+		<Button disabled>Disabled</Button>
+		<Button fullWidth>Full width</Button>
+	</section>
+
+	<section class="flex flex-wrap items-center gap-3">
+		<Badge tone="new" />
+		<Badge tone="sale" />
+		<Badge tone="best-seller" />
+		<Badge tone="sold-out" />
+		<span lang="bn"><Badge tone="best-seller" /></span>
+		<StatusPill tone="success">Delivered</StatusPill>
+		<StatusPill tone="warning">Pending</StatusPill>
+		<StatusPill tone="error">Cancelled</StatusPill>
+		<StatusPill>Draft</StatusPill>
+	</section>
+
+	<section class="flex flex-wrap items-baseline gap-6">
+		<Price amount={145_000} />
+		<Price amount={145_000} compareAt={180_000} size="lg" />
+		<Price amount={145_000} compareAt={180_000} size="hero" />
+	</section>
+
+	<section class="flex flex-wrap gap-4">
+		{#each iconNames as name (name)}
+			<span class="flex w-20 flex-col items-center gap-1 text-xs text-ink-600">
+				<Icon {name} class="text-ink-900" />{name}
+			</span>
+		{/each}
+	</section>
+
+	<section class="grid max-w-md gap-4">
+		<TextField label="Full name" autocomplete="name" />
+		<TextField
+			label="Mobile number"
+			type="tel"
+			hint="11 digits, starting 01"
+			error="Enter 11 digits, starting 01"
+		/>
+		<Select
+			label="District"
+			options={[
+				{ value: '', label: 'Choose a district' },
+				{ value: 'dhaka', label: 'Dhaka' }
+			]}
+		/>
+		<TextArea label="Order notes" optional />
+	</section>
+
+	<section class="flex flex-col gap-4">
+		<QuantityStepper bind:value={quantity} max={3} />
+		<FilterChipRow label="Category">
+			{#each ['Shoulder', 'Crossbody', 'Tote', 'Clutch', 'Backpack', 'Wallet', 'Mini'] as c (c)}
+				<FilterChip selected={chip === c} onclick={() => (chip = c)}>{c}</FilterChip>
+			{/each}
+		</FilterChipRow>
+		<div class="flex gap-3">
+			<Button variant="secondary" onclick={() => (toast = 'success')}>Success toast</Button>
+			<Button variant="secondary" onclick={() => (toast = 'error')}>Error toast</Button>
+		</div>
+		{#if toast}
+			<Toast tone={toast} ondismiss={() => (toast = null)}>
+				{toast === 'error' ? 'Could not add to cart.' : 'Added to cart.'}
+			</Toast>
+		{/if}
 	</section>
 </main>

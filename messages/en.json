@@ -1,5 +1,17 @@
 {
 	"$schema": "https://inlang.com/schema/inlang-message-format",
 	"site_name": "Bagvaly",
-	"home_tagline": "Everyday elegance, delivered to your door."
+	"home_tagline": "Everyday elegance, delivered to your door.",
+	"ui_loading": "Loading",
+	"ui_badge_new": "New",
+	"ui_badge_sale": "Sale",
+	"ui_badge_best_seller": "Best seller",
+	"ui_badge_sold_out": "Sold out",
+	"ui_price_regular": "Regular price",
+	"ui_percent_off": "{percent}% off",
+	"ui_optional": "(optional)",
+	"ui_quantity": "Quantity",
+	"ui_quantity_decrease": "Decrease quantity",
+	"ui_quantity_increase": "Increase quantity",
+	"ui_dismiss": "Dismiss"
 }
