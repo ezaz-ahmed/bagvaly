@@ -14,5 +14,42 @@
 	"ui_quantity_decrease": "Decrease quantity",
 	"ui_quantity_increase": "Increase quantity",
 	"ui_dismiss": "Dismiss",
-	"shop_colour_count": "{count} colours"
+	"shop_colour_count": "{count} colours",
+	"layout_skip_to_content": "Skip to content",
+	"layout_announcement": "Cash on delivery all over Bangladesh",
+	"layout_home": "Bagvaly home",
+	"layout_main_nav": "Main",
+	"layout_menu": "Menu",
+	"layout_open_menu": "Open menu",
+	"layout_close_menu": "Close menu",
+	"layout_cart": "Cart",
+	"layout_cart_count": [
+		{
+			"declarations": ["input count", "local countPlural = count: plural"],
+			"selectors": ["countPlural"],
+			"match": {
+				"countPlural=one": "Cart, {count} item",
+				"countPlural=other": "Cart, {count} items"
+			}
+		}
+	],
+	"layout_categories": "Categories",
+	"layout_category_shoulder": "Shoulder",
+	"layout_category_tote": "Tote",
+	"layout_category_crossbody": "Crossbody",
+	"layout_category_top_handle": "Top-handle",
+	"layout_category_clutch": "Clutch",
+	"layout_category_backpack": "Backpack",
+	"layout_help": "Help",
+	"layout_shop_all": "Shop all bags",
+	"layout_track_order": "Track your order",
+	"layout_delivery_exchange": "Delivery and exchange",
+	"layout_contact_us": "Contact us",
+	"layout_footer_nav": "Footer",
+	"layout_tagline": "Everyday elegance, made affordable.",
+	"layout_social": "Follow us",
+	"layout_whatsapp": "Chat on WhatsApp",
+	"layout_call": "Call {phone}",
+	"layout_language": "Language",
+	"layout_copyright": "© {year} Bagvaly"
 }

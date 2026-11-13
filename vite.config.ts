@@ -251,7 +251,12 @@ export default defineConfig({
 		paraglideVitePlugin({
 			project: './project.inlang',
 			outdir: './src/lib/paraglide',
-			emitTsDeclarations: true
+			emitTsDeclarations: true,
+			// Locale lives in the URL (English at `/`, Bangla under `/bn/`) so cached pages and
+			// canonical URLs are per language; the default URL patterns already map it that way.
+			strategy: ['url', 'baseLocale'],
+			// Matches SvelteKit's default, so `/bn` is not served as `/bn/` behind a redirect.
+			trailingSlash: 'never'
 		})
 	]),
 	test: {
