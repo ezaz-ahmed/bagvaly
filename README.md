@@ -33,7 +33,8 @@ Requires [Vite+](https://viteplus.dev) (`vp`). It installs the pinned Node.js an
 ```sh
 pnpm install                 # also runs `svelte-kit sync` and `wrangler types`
 cp .env.example .env         # then fill in the values (see below)
-vp run db:migrate:local      # create the auth tables in the local D1 database
+vp run db:migrate:local      # create the tables in the local D1 database
+vp run db:seed:local         # optional: sample categories and products for development
 vp dev
 ```
 
@@ -47,6 +48,16 @@ from `wrangler.jsonc` `vars` (`ORIGIN`) and `wrangler secret put` (secrets).
 | `ORIGIN`                                                                 | Public base URL, e.g. `http://localhost:5173`          |
 | `BETTER_AUTH_SECRET`                                                     | Session signing secret (32+ random characters)         |
 | `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_DATABASE_ID`, `CLOUDFLARE_D1_TOKEN` | Only for `drizzle-kit` commands that talk to remote D1 |
+
+### Sample catalogue data
+
+`vp run db:seed:local` runs [scripts/seed-catalog.ts](scripts/seed-catalog.ts) with `vpx`. It adds
+the six categories (with Bangla names) and the eight sample bags from the designs, with their
+colours and stock, to the local D1 database. Run `vp run db:migrate:local` first. It is safe to
+rerun: rows that already exist (same slug or SKU) are left as they are, including local edits.
+The script always runs `wrangler d1 execute DB --local` and refuses any arguments, so it cannot
+seed a remote database. The data is placeholder data for development only. No images are
+seeded, because there are no matching R2 objects locally.
 
 ### Phone OTP in development
 
@@ -70,6 +81,7 @@ refuses to send OTPs until a gateway adapter is added in `src/lib/server/provide
 | `vp run gen`              | Regenerate `worker-configuration.d.ts` from `wrangler.jsonc`    |
 | `vp run db:generate`      | Generate a migration in `drizzle/` from the schema              |
 | `vp run db:migrate:local` | Apply migrations to the local D1 database                       |
+| `vp run db:seed:local`    | Add sample categories and products to the local D1 database     |
 | `vp run auth:schema`      | Regenerate the Better Auth tables after changing auth plugins   |
 
 Lint and format rules live in the `lint` and `fmt` sections of [vite.config.ts](vite.config.ts).
@@ -100,12 +112,15 @@ src/
   lib/
     server/
       auth.ts          # Better Auth (phone OTP)
+      catalog/         # Product input validation (Valibot) and slug helper
       db/              # Drizzle schema and client
       providers/sms/   # SMS adapter (dev-only until a gateway is chosen)
+    localized.ts       # Bangla text with English fallback
     phone.ts           # Bangladeshi phone normalization (+8801XXXXXXXXX)
   routes/              # Pages; layout.css holds the brand theme tokens
 messages/              # en.json, bn.json (Paraglide)
 drizzle/               # Committed D1 migrations
+scripts/               # Local development scripts (catalogue seed)
 docs/decisions.md      # Decision log
 ```
 

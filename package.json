@@ -20,6 +20,7 @@
 		"db:generate": "drizzle-kit generate",
 		"db:migrate": "drizzle-kit migrate",
 		"db:migrate:local": "wrangler d1 migrations apply DB --local",
+		"db:seed:local": "vpx scripts/seed-catalog.ts",
 		"db:studio": "drizzle-kit studio",
 		"auth:schema": "auth generate --config src/lib/server/auth.ts --output src/lib/server/db/auth.schema.ts --yes"
 	},
@@ -45,6 +46,7 @@
 		"svelte-check": "^4.7.8",
 		"tailwindcss": "^4.3.5",
 		"typescript": "^6.0.3",
+		"valibot": "^1.5.0",
 		"vite": "catalog:",
 		"vite-plus": "catalog:",
 		"wrangler": "^4.160.1"

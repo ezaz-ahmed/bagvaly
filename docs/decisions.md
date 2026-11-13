@@ -2,6 +2,17 @@
 
 Short record of significant decisions and why they were made. Newest first.
 
+## 2026-11-13: Catalogue schema
+
+Approved schema from issue #60: `categories`, `products`, `product_variants` (one row per colour,
+with its own SKU and stock) and `product_images`. IDs are integer `AUTOINCREMENT`, so a deleted
+row's ID is never handed out again. Prices are integer poisha, with CHECKs for `price >= 0`,
+`compare_at_price > price` and `stock >= 0`, and a status CHECK (`published`, `draft`, `hidden`).
+Bangla text columns are `NOT NULL DEFAULT ''`; an empty value shows the English text
+(`src/lib/localized.ts`). Deleting a category with products is refused; deleting a product
+removes its variants and image rows (R2 objects must be cleaned up separately), and deleting a
+colour keeps its photos as general product photos. Occasions (home page) are left for later.
+
 ## 2026-11-13: Gitleaks secret scan in CI
 
 A GitHub Actions workflow runs Gitleaks (pinned release, checksum-verified, no project
