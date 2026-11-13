@@ -15,12 +15,84 @@
 	--color-foreground: #292525;
 	--color-surface: #e8dccf;
 
+	/* Full scale from the design system; the five roles above alias these values. */
+	--color-burgundy-600: #790b27;
+	--color-burgundy-700: #5e0820;
+	--color-rose-50: #f3e1e5;
+	--color-ivory-50: #fdf7eb;
+	--color-sand-200: #e8dccf;
+	--color-sand-300: #d6c5b1;
+	--color-gold-400: #b99a6b;
+	--color-gold-700: #8a6a3e;
+	--color-ink-900: #292525;
+	--color-ink-600: #6b6260;
+	--color-success-50: #e3f0e9;
+	--color-success-700: #2e6b4e;
+	--color-warning-50: #fbf0d9;
+	--color-warning-700: #8a5a00;
+	--color-error-50: #f8e4e2;
+	--color-error-700: #a8281f;
+	--color-card: #ffffff;
+
+	/* Overrides Tailwind's default sm/md/lg radii and sm/lg shadows on purpose. */
+	--radius-sm: 6px;
+	--radius-md: 12px;
+	--radius-lg: 20px;
+	--radius-pill: 999px;
+
+	--shadow-sm: 0 1px 2px rgba(41, 37, 37, 0.06);
+	--shadow-lg: 0 18px 40px rgba(94, 8, 32, 0.14);
+
+	--ease-brand: cubic-bezier(0.2, 0.7, 0.2, 1);
+	--transition-duration-tap: 150ms;
+	--transition-duration-panel: 240ms;
+	--transition-duration-page: 480ms;
+
+	--container-page: 1200px;
+	--spacing-gutter: 16px;
+	--spacing-header: 64px;
+	--spacing-tap: 48px;
+
 	--font-heading: 'Fraunces Variable', 'Hind Siliguri', Georgia, serif;
 	--font-heading--font-variation-settings: 'SOFT' 100;
 	--font-body: 'Manrope Variable', 'Hind Siliguri', system-ui, sans-serif;
 }
 
+/* Responsive layout tokens: utilities read the variables, so overriding them here is enough. */
 @layer base {
+	@media (width >= 48rem) {
+		:root {
+			--spacing-gutter: 32px;
+			--spacing-header: 80px;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		:root {
+			--transition-duration-tap: 0ms;
+			--transition-duration-panel: 0ms;
+			--transition-duration-page: 0ms;
+			--default-transition-duration: 0ms;
+		}
+	}
+
+	:focus-visible {
+		outline: 3px solid var(--color-gold-400);
+		outline-offset: 2px;
+	}
+
+	a {
+		color: var(--color-gold-700);
+	}
+
+	a:hover {
+		color: var(--color-burgundy-700);
+	}
+
+	[lang='bn'] {
+		line-height: 1.7;
+	}
+
 	body {
 		@apply bg-background font-body text-foreground;
 	}

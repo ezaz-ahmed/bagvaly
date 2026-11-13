@@ -446,6 +446,23 @@ rather than hard-coding colors in components:
 | Text               | `color-foreground` | `#292525` |
 | Surface            | `color-surface`    | `#E8DCCF` |
 
+The five roles above alias the full scale, which components should use
+for everything else (all in `layout.css`):
+
+| Group  | Tailwind tokens                                                                                                                          |
+| ------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| Colour | `burgundy-600/700`, `rose-50`, `ivory-50`, `sand-200/300`, `gold-400/700`, `ink-900/600`, `success/warning/error-50/700`, `card` (white) |
+| Radius | `rounded-sm` 6px (inputs), `rounded-md` 12px (buttons), `rounded-lg` 20px (cards, sheets), `rounded-pill`                                |
+| Shadow | `shadow-sm`, `shadow-lg` (warm burgundy tint; sticky bars, drawers)                                                                      |
+| Motion | `ease-brand`; `duration-tap` 150ms, `duration-panel` 240ms, `duration-page` 480ms (0 under reduced motion)                               |
+| Layout | `max-w-page` 1200px, `px-gutter` 16px/32px from `md`, `h-header` 64px/80px from `md`, `min-h-tap` 48px                                   |
+
+Base styles: `:focus-visible` 3px `gold-400` outline, links `gold-700`
+(hover `burgundy-700`), `[lang="bn"]` line-height 1.7. Text colours:
+`ink-900` for body, `ink-600` for captions, `gold-700` for accent text;
+`gold-400` is decorative only (2.5:1 on ivory). Visual QA page:
+`/_dev/tokens` (dev server only).
+
 Typography:
 
 | Role            | Font          | Tailwind utility | Notes                                                   |
@@ -470,7 +487,7 @@ Typography:
 - Admin: desktop-first, while remaining usable on smaller screens.
 - Use semantic HTML, keyboard-accessible controls, visible focus
   states, and meaningful alternative text.
-- Aim for touch targets of at least 44px and readable color contrast.
+- Aim for touch targets of at least 48px (`min-h-tap`) and readable color contrast.
 - Avoid clutter and unnecessary interaction steps in product discovery
   and COD checkout.
 - Keep loading, empty, validation, error, and success states clear.
