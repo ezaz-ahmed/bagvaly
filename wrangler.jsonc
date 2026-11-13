@@ -8,16 +8,64 @@
 		"binding": "ASSETS",
 		"directory": ".svelte-kit/cloudflare"
 	},
+	// Top level = production. `vp dev` and `vp run preview` always use Wrangler's local D1/R2
+	// emulation, whatever IDs are set here.
 	"d1_databases": [
 		{
 			"binding": "DB",
 			"database_name": "bagvaly",
-			// Placeholder for local development only. Replace with the ID printed by
-			// `wrangler d1 create bagvaly --location apac` before any remote deploy.
+			// Placeholder: replace with the ID printed by
+			// `wrangler d1 create bagvaly --location apac` before the first production deploy.
 			"database_id": "00000000-0000-0000-0000-000000000000",
 			"migrations_dir": "drizzle"
 		}
 	],
+	"r2_buckets": [
+		{
+			"binding": "R2",
+			// Local emulation only until the production bucket exists; create it and set its
+			// name here before the first production deploy.
+			"bucket_name": "bagvaly-local-assets"
+		}
+	],
+	// Empty on purpose: ORIGIN fails validation, so the Worker refuses requests until the real
+	// origin is set. Locally, `.env` overrides this value.
+	"vars": {
+		"ORIGIN": ""
+	},
+	// Only these keys from `.env` (plus `vars`) reach the local Worker, so tooling credentials
+	// such as CLOUDFLARE_D1_TOKEN stay out of it. Set deployed values with `wrangler secret put`.
+	"secrets": {
+		"required": ["BETTER_AUTH_SECRET"]
+	},
 	"workers_dev": true,
-	"preview_urls": true
+	"preview_urls": true,
+	"env": {
+		// Bindings, vars and secrets are not inherited by named environments; declare each one.
+		"staging": {
+			"d1_databases": [
+				{
+					"binding": "DB",
+					"database_name": "bagvaly-staging",
+					// Placeholder: replace with the ID printed by
+					// `wrangler d1 create bagvaly-staging --location apac`.
+					"database_id": "00000000-0000-0000-0000-000000000000",
+					"migrations_dir": "drizzle"
+				}
+			],
+			"r2_buckets": [
+				{
+					"binding": "R2",
+					// Create with `wrangler r2 bucket create bagvaly-staging-assets` before deploying.
+					"bucket_name": "bagvaly-staging-assets"
+				}
+			],
+			"vars": {
+				"ORIGIN": ""
+			},
+			"secrets": {
+				"required": ["BETTER_AUTH_SECRET"]
+			}
+		}
+	}
 }

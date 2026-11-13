@@ -39,8 +39,8 @@ vp dev
 
 ### Environment variables
 
-Local values live in `.env` (ignored by Git). Deployed values are Cloudflare secrets set with
-`wrangler secret put`.
+Local values live in `.env` (ignored by Git; there is no `.dev.vars`). Deployed values come
+from `wrangler.jsonc` `vars` (`ORIGIN`) and `wrangler secret put` (secrets).
 
 | Variable                                                                 | Purpose                                                |
 | ------------------------------------------------------------------------ | ------------------------------------------------------ |
@@ -90,9 +90,8 @@ gitleaks git --pre-commit --staged --redact . # only what you are about to commi
 `gitleaks dir .` also reads ignored files such as `.env`, so a finding there is expected and not
 a leak. [.gitleaksignore](.gitleaksignore) lists the only accepted findings by fingerprint (commit,
 file, rule, line). Add an entry only for a confirmed false positive, with a comment explaining it.
-A real secret must be removed and rotated, not ignored. The one exception is a temporary entry for
-an already-public historical Supabase `anon` key, which must be removed once the old project is
-deleted or its JWT secret is rotated.
+A real secret must be removed and rotated, not ignored. The only other entry is a historical
+Supabase `anon` key that has since been revoked.
 
 ## Project layout
 
@@ -112,12 +111,13 @@ docs/decisions.md      # Decision log
 
 ## Deployment
 
-Not set up yet. The `DB` binding in `wrangler.jsonc` uses a placeholder ID that only works
-locally. Before the first deploy:
+Not set up yet. `wrangler.jsonc` has a production (top level) and a `staging` environment whose
+D1 IDs are placeholders and whose `ORIGIN` is empty, so neither can serve requests yet. Before
+the first deploy:
 
 1. Create the production and staging D1 databases (`wrangler d1 create … --location apac`) and
    the R2 buckets.
-2. Add the real IDs and a separate `staging` environment to `wrangler.jsonc`.
+2. Put the real IDs, bucket names and `ORIGIN` values in `wrangler.jsonc`.
 3. Set secrets per environment with `wrangler secret put`.
 4. Add deploy and remote-migration package scripts.
 

@@ -8,9 +8,28 @@ A GitHub Actions workflow runs Gitleaks (pinned release, checksum-verified, no p
 dependency) over the full history on every push and pull request, with values redacted.
 `.gitleaksignore` holds two fingerprinted findings from commit `31fe87a` (2023 Supabase
 prototype). The first is a false positive: Supabase's public local-demo key. The second is a
-temporary exception, not a false positive: a real Supabase project `anon` key that is already
-public in history. Rewriting history would not un-publish it. The owner must delete that Supabase
-project or rotate its JWT secret, and the exception must then be removed.
+real Supabase project `anon` key that is public in history; the owner confirmed it is deleted, so
+it is ignored as revoked. History is not rewritten, because that would not un-publish it.
+
+## 2026-11-13: One local env file, secrets declared in Wrangler
+
+SvelteKit reads `$app/env/private` from `.env` in `vp dev` and during the build (prerendering
+fails if a value is missing), while Wrangler stops reading `.env` once a `.dev.vars` exists. A
+`.dev.vars` would therefore duplicate `ORIGIN` and `BETTER_AUTH_SECRET`, so there is none: all
+local values live in the ignored `.env`. `secrets.required` in `wrangler.jsonc` lists the Worker
+secrets, so only those reach the local Worker and its generated `Env` type. Tooling credentials
+(`CLOUDFLARE_*` for drizzle-kit) stay out of the Worker. Deployed secrets are set with
+`wrangler secret put`.
+
+`ORIGIN` is not secret, so it is a Worker `var`, per environment. It stays empty until the
+domains are chosen, so a deployed Worker fails validation instead of running with a wrong
+origin; `.env` overrides it locally.
+
+The top level of `wrangler.jsonc` is production and `env.staging` is staging, each with its own
+D1 and R2 (placeholder IDs until created). Local development always uses Wrangler's local D1 and
+R2 emulation. `CLOUDFLARE_DATABASE_ID` (drizzle-kit) must match the `database_id` of the remote
+environment being targeted. There is no Images binding: images use URL-based
+`/cdn-cgi/image` transformations.
 
 ## 2026-10-31: Worker types are generated, not committed
 

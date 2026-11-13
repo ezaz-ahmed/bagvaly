@@ -6,9 +6,7 @@
 # published by Supabase for every local install.
 31fe87a0000ae0f7e609d128d677d54202a11033:.env:jwt:2
 
-# TEMPORARY EXCEPTION, NOT A FALSE POSITIVE: a real Supabase project `anon` key (browser-public
-# role, not service_role) that has been public in this repository's history since 2023.
-# Ignored only so CI can run while the owner acts on the old Supabase project.
-# REMOVE THIS ENTRY once that project is deleted or its JWT secret is rotated
-# (see docs/decisions.md, 2026-11-13 "Gitleaks secret scan in CI").
+# REVOKED: a real Supabase project `anon` key (browser-public role, not service_role) that has
+# been in this repository's history since 2023. The owner confirmed on 2026-11-13 that the key is
+# deleted, so it no longer grants access. Kept only because history still contains it.
 31fe87a0000ae0f7e609d128d677d54202a11033:.env.production:jwt:2
