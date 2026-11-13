@@ -1,6 +1,7 @@
 import { env } from 'cloudflare:workers';
 import { building } from '$app/env';
 import { createAuth } from '#lib/server/auth.ts';
+import { publicCacheHandle } from '#lib/server/cache.ts';
 import { svelteKitHandler } from 'better-auth/svelte-kit';
 import { type Handle, sequence } from '@sveltejs/kit/hooks';
 import { getTextDirection } from '#lib/paraglide/runtime.js';
@@ -36,4 +37,8 @@ const handleBetterAuth: Handle = async ({ event, resolve }) => {
 	return svelteKitHandler({ event, resolve, auth, building });
 };
 
-export const handle: Handle = sequence(handleParaglide, handleBetterAuth);
+// Public storefront pages served from the edge cache. `/bn` reroutes to the same route ID; the
+// cache key is the full URL, so each locale gets its own entry.
+const handleCache = publicCacheHandle(['/(shop)']);
+
+export const handle: Handle = sequence(handleCache, handleParaglide, handleBetterAuth);
