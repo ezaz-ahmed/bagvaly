@@ -13,6 +13,17 @@ export const categories = [
 	{ slug: 'backpack', label: m.layout_category_backpack }
 ];
 
+/**
+ * Home page "Shop by occasion" cards. Occasions are not modelled in the catalogue, so each links to
+ * the category that best fits it.
+ * shortcut: fixed category per occasion, replace with an occasion tag if the owner wants mixed picks.
+ */
+export const occasions = [
+	{ category: 'tote', label: m.home_occasion_office },
+	{ category: 'crossbody', label: m.home_occasion_everyday },
+	{ category: 'clutch', label: m.home_occasion_festive }
+];
+
 /** Help pages; they 404 until their own issues build them. */
 export const helpLinks = [
 	{ path: '/track', label: m.layout_track_order },
