@@ -28,7 +28,7 @@
 </script>
 
 <a
-	href={resolve(localizeHref(`/product/${product.slug}`) as Path)}
+	href={resolve(localizeHref(`/bags/${product.slug}`) as Path)}
 	class="flex h-full flex-col overflow-hidden rounded-lg bg-card text-ink-900 no-underline shadow-sm transition duration-panel ease-brand hover:text-ink-900 md:hover:shadow-md motion-safe:md:hover:-translate-y-0.5"
 >
 	<div class="relative">
