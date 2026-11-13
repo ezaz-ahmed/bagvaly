@@ -34,13 +34,15 @@
 	--color-error-700: #a8281f;
 	--color-card: #ffffff;
 
-	/* Overrides Tailwind's default sm/md/lg radii and sm/lg shadows on purpose. */
+	/* Overrides Tailwind's default sm/md/lg radii and sm/md/lg shadows on purpose. */
 	--radius-sm: 6px;
 	--radius-md: 12px;
 	--radius-lg: 20px;
 	--radius-pill: 999px;
 
 	--shadow-sm: 0 1px 2px rgba(41, 37, 37, 0.06);
+	/* Card hover on desktop, with a 2px lift. */
+	--shadow-md: 0 6px 18px rgba(41, 37, 37, 0.08);
 	--shadow-lg: 0 18px 40px rgba(94, 8, 32, 0.14);
 
 	--ease-brand: cubic-bezier(0.2, 0.7, 0.2, 1);

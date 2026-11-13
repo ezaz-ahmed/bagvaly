@@ -13,5 +13,6 @@
 	"ui_quantity": "Quantity",
 	"ui_quantity_decrease": "Decrease quantity",
 	"ui_quantity_increase": "Increase quantity",
-	"ui_dismiss": "Dismiss"
+	"ui_dismiss": "Dismiss",
+	"shop_colour_count": "{count} colours"
 }

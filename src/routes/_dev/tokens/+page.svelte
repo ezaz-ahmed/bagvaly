@@ -15,6 +15,8 @@
 		Toast
 	} from '#lib/components/ui/index.ts';
 	import { iconNames } from '#lib/components/ui/Icon.svelte';
+	import ProductGrid from '#lib/components/shop/ProductGrid.svelte';
+	import type { ProductCardData } from '#lib/components/shop/product-card.ts';
 
 	let quantity = $state(1);
 	let chip = $state('Tote');
@@ -37,6 +39,46 @@
 		'bg-error-50',
 		'bg-error-700',
 		'bg-card'
+	];
+	// Photos are local only: drop any JPEG at static/dev/sample-bag.jpg (do not commit it).
+	const photo = { key: 'dev/sample-bag.jpg', alt: 'Sample bag', width: 800, height: 1000 };
+	const card = {
+		price: 145_000,
+		compareAtPrice: null,
+		isNew: false,
+		isBestSeller: false,
+		inStock: true,
+		colourCount: 3,
+		image: photo
+	};
+	const cards: ProductCardData[] = [
+		{
+			...card,
+			slug: 'sold-out',
+			name: 'Sold out, on sale',
+			inStock: false,
+			compareAtPrice: 180_000
+		},
+		{
+			...card,
+			slug: 'sale',
+			name: 'Sale crossbody with a long name that wraps',
+			compareAtPrice: 180_000
+		},
+		{
+			...card,
+			slug: 'new',
+			name: 'নতুন চামড়ার শোল্ডার ব্যাগ, লম্বা নাম যা দুই লাইনের বেশি জায়গা নেয়',
+			isNew: true
+		},
+		{
+			...card,
+			slug: 'no-image',
+			name: 'Best seller, no photo',
+			isBestSeller: true,
+			colourCount: 1,
+			image: null
+		}
 	];
 	const sizes = ['text-xs', 'text-sm', 'text-base', 'text-lg', 'text-xl', 'text-2xl', 'text-4xl'];
 </script>
@@ -141,6 +183,8 @@
 		/>
 		<TextArea label="Order notes" optional />
 	</section>
+
+	<ProductGrid products={cards} priorityCount={2} showColours />
 
 	<section class="flex flex-col gap-4">
 		<QuantityStepper bind:value={quantity} max={3} />

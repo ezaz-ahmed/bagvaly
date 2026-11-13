@@ -13,5 +13,6 @@
 	"ui_quantity": "পরিমাণ",
 	"ui_quantity_decrease": "পরিমাণ কমান",
 	"ui_quantity_increase": "পরিমাণ বাড়ান",
-	"ui_dismiss": "বন্ধ করুন"
+	"ui_dismiss": "বন্ধ করুন",
+	"shop_colour_count": "{count}টি রঙ"
 }

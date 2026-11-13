@@ -453,7 +453,7 @@ for everything else (all in `layout.css`):
 | ------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
 | Colour | `burgundy-600/700`, `rose-50`, `ivory-50`, `sand-200/300`, `gold-400/700`, `ink-900/600`, `success/warning/error-50/700`, `card` (white) |
 | Radius | `rounded-sm` 6px (inputs), `rounded-md` 12px (buttons), `rounded-lg` 20px (cards, sheets), `rounded-pill`                                |
-| Shadow | `shadow-sm`, `shadow-lg` (warm burgundy tint; sticky bars, drawers)                                                                      |
+| Shadow | `shadow-sm`, `shadow-md` (card hover), `shadow-lg` (warm burgundy tint; sticky bars, drawers)                                            |
 | Motion | `ease-brand`; `duration-tap` 150ms, `duration-panel` 240ms, `duration-page` 480ms (0 under reduced motion)                               |
 | Layout | `max-w-page` 1200px, `px-gutter` 16px/32px from `md`, `h-header` 64px/80px from `md`, `min-h-tap` 48px                                   |
 
