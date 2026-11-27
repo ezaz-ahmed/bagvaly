@@ -29,8 +29,6 @@ test('shop filters by category and marks the active chip', async ({ page }) => {
 test('a sold-out colour cannot be added to the bag', async ({ page }) => {
 	const response = await page.goto('/bags/pearl-evening-clutch');
 	test.skip(response?.status() !== 200, 'local D1 not seeded');
-	// Hydration re-applies the default colour, so a click before it lands is undone.
-	await page.waitForLoadState('networkidle');
 	// The radio is visually hidden inside its swatch label; click the swatch like a shopper.
 	await page.getByTitle('Ivory', { exact: true }).click();
 	await expect(page.getByRole('radio', { name: /Ivory/ })).toBeChecked();

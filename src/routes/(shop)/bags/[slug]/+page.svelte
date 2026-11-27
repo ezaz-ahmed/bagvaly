@@ -22,7 +22,8 @@
 	const product = $derived(data.product);
 
 	// Writable deriveds: picks reset when another product's page reuses this component. The
-	// default colour is the first with stock, so it can be bought.
+	// default colour is the first with stock, so it can be bought. bind:group (not checked=)
+	// keeps a colour tapped before hydration.
 	let variantId = $derived(product.variants.find((v) => v.inStock)?.id ?? product.variants[0]?.id);
 	const variant = $derived(product.variants.find((v) => v.id === variantId));
 	let quantity = $derived.by(() => {
@@ -210,8 +211,7 @@
 										type="radio"
 										name="variantId"
 										value={option.id}
-										checked={option.id === variantId}
-										onchange={() => (variantId = option.id)}
+										bind:group={variantId}
 										class="peer sr-only"
 									/>
 									<span class="sr-only"
