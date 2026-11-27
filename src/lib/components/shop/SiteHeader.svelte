@@ -1,22 +1,22 @@
 <script lang="ts">
 	import type { Path } from '$app/types';
-	import { onMount } from 'svelte';
+	import { afterNavigate } from '$app/navigation';
 	import { resolve } from '$app/paths';
 	import { getLocale, localizeHref } from '#lib/paraglide/runtime.js';
 	import { m } from '#lib/paraglide/messages.js';
-	import { readCartCount } from '#lib/cart-count.ts';
+	import { numberLocale } from '#lib/money.ts';
+	import { cartBadge, refreshCartBadge } from '#lib/cart-badge.svelte.ts';
 	import { categories } from '#lib/config.ts';
 	import { Icon } from '#lib/components/ui/index.ts';
 	import LanguageSwitch from './LanguageSwitch.svelte';
 	import MobileMenu from './MobileMenu.svelte';
+	import TabBar from './TabBar.svelte';
 
 	let menu: MobileMenu;
 
-	// Client-only: cached HTML must never carry a visitor's cart.
-	let cartCount = $state(0);
-	onMount(() => {
-		cartCount = readCartCount(document.cookie);
-	});
+	// Client-only: cached HTML must never carry a visitor's cart. Also runs on first load.
+	afterNavigate(refreshCartBadge);
+	const cartCount = $derived(cartBadge.count);
 
 	const iconButton =
 		'flex size-12 items-center justify-center rounded-md text-ink-900 hover:bg-sand-200 hover:text-ink-900';
@@ -24,14 +24,15 @@
 
 <header class="sticky top-0 z-30 border-b border-sand-200 bg-background">
 	<div
-		class="mx-auto flex h-header max-w-page items-center justify-between gap-6 px-2 md:px-gutter"
+		class="mx-auto flex h-header max-w-page items-center justify-center gap-6 px-2 md:justify-between md:px-gutter"
 	>
+		<!-- Phones get the menu and cart from the tab bar instead. -->
 		<button
 			type="button"
 			aria-haspopup="dialog"
 			aria-controls="mobile-menu"
 			onclick={() => menu.open()}
-			class={[iconButton, 'lg:hidden']}
+			class={[iconButton, 'max-md:hidden lg:hidden']}
 		>
 			<Icon name="menu" label={m.layout_open_menu()} />
 		</button>
@@ -53,7 +54,7 @@
 			{/each}
 		</nav>
 
-		<div class="flex items-center gap-1">
+		<div class="flex items-center gap-1 max-md:hidden">
 			<div class="hidden lg:block"><LanguageSwitch compact /></div>
 			<a
 				href={resolve(localizeHref('/cart') as Path)}
@@ -65,7 +66,7 @@
 					<span
 						aria-hidden="true"
 						class="absolute top-1.5 right-1 min-w-[18px] rounded-pill bg-burgundy-600 px-[5px] text-center text-xs leading-[18px] font-semibold text-ivory-50"
-						>{cartCount.toLocaleString(getLocale() === 'bn' ? 'bn-BD' : 'en-US')}</span
+						>{cartCount.toLocaleString(numberLocale(getLocale()))}</span
 					>
 				{/if}
 			</a>
@@ -74,3 +75,4 @@
 </header>
 
 <MobileMenu bind:this={menu} />
+<TabBar onmenu={() => menu.open()} />

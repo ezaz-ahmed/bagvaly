@@ -5,7 +5,7 @@ vi.mock('cloudflare:workers', () => ({ waitUntil: (p: Promise<unknown>) => pendi
 vi.mock('$app/env', () => ({ dev: false, building: false }));
 vi.mock('$app/env/private', () => ({ ORIGIN: 'https://bagvaly.test' }));
 
-const { affectedUrls, cachedPublic, PUBLIC_CACHE_TTL_SECONDS } = await import('./cache');
+const { affectedUrls, cacheKey, cachedPublic, PUBLIC_CACHE_TTL_SECONDS } = await import('./cache');
 
 /** In-memory stand-in for `caches.default`, keyed by URL like the Cache API. */
 let store: Map<string, Response>;
@@ -44,11 +44,38 @@ describe('cachedPublic', () => {
 		expect(render).toHaveBeenCalledTimes(1);
 	});
 
-	it('keys by full URL, so locales and query strings are cached separately', async () => {
+	it('keys by path and page params, so locales and categories are cached separately', async () => {
 		await run(new Request('https://bagvaly.test/shop'), page());
 		await run(new Request('https://bagvaly.test/bn/shop'), page());
 		await run(new Request('https://bagvaly.test/shop?category=tote'), page());
 		expect(store.size).toBe(3);
+	});
+
+	it('serves ad clicks (fbclid, utm_*) and junk params from the plain page entry', async () => {
+		const render = vi.fn(page());
+		await run(new Request(URL_), render);
+		const hit = await run(
+			new Request(`${URL_}&fbclid=IwAR123&utm_source=fb&x=${Math.random()}`),
+			render
+		);
+		expect(await hit.text()).toBe('<html>shop</html>');
+		expect(render).toHaveBeenCalledOnce();
+		expect([...store.keys()]).toEqual([URL_]);
+	});
+});
+
+describe('cacheKey', () => {
+	it('keeps page params in a fixed order and drops the rest', () => {
+		expect(
+			cacheKey('https://bagvaly.test/shop?utm_term=x&sort=price_asc&category=tote&category=bag')
+		).toBe('https://bagvaly.test/shop?category=tote&sort=price_asc');
+		expect(cacheKey('https://bagvaly.test/bn?fbclid=abc')).toBe('https://bagvaly.test/bn');
+	});
+
+	it('matches the purge URLs exactly', () => {
+		for (const url of affectedUrls({ slug: 'tote-1', categorySlugs: ['tote'] })) {
+			expect(cacheKey(url)).toBe(url);
+		}
 	});
 
 	it.each([

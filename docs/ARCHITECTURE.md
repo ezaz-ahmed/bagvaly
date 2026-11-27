@@ -83,41 +83,11 @@ Shopper request path: edge cache → Worker (SSR) → D1. Images never pass thro
 
 ## 4. Repository layout
 
-```
-bagvaly/
-├─ src/
-│  ├─ routes/
-│  │  ├─ (shop)/                 # public storefront
-│  │  │  ├─ +page.svelte          # home / hero
-│  │  │  ├─ bags/[slug]/          # product detail
-│  │  │  ├─ category/[slug]/      # listing pages
-│  │  │  ├─ cart/
-│  │  │  ├─ checkout/
-│  │  │  └─ orders/[id]/          # confirmation / tracking
-│  │  ├─ (account)/              # OTP login, profile, order history
-│  │  ├─ admin/                  # desktop-first admin (auth-guarded)
-│  │  └─ api/                    # JSON endpoints (auth, uploads, webhooks)
-│  ├─ lib/
-│  │  ├─ server/
-│  │  │  ├─ db/                   # schema, queries
-│  │  │  ├─ auth.ts               # Better Auth instance
-│  │  │  ├─ storage.ts            # R2 helpers
-│  │  │  ├─ notify/               # WhatsApp + SMS adapters
-│  │  │  ├─ courier/              # CourierAdapter interface + impls
-│  │  │  └─ orders/               # order service, status transitions
-│  │  ├─ components/
-│  │  ├─ images.ts               # builds /cdn-cgi/image URLs
-│  │  └─ types.ts
-│  ├─ app.css                    # Tailwind + design tokens
-│  └─ hooks.server.ts            # session loading, admin guard
-├─ migrations/                   # D1 SQL migrations
-├─ static/
-├─ wrangler.jsonc
-├─ ARCHITECTURE.md
-└─ README.md
-```
-
-Rule: **all D1/R2/external calls live in `src/lib/server/`**. Routes call services, never bindings directly.
+The folder map and its rules live in [AGENTS.md section 5](../AGENTS.md#5-architecture-and-code-organization);
+this file does not repeat them. In short: storefront routes in `src/routes/(shop)/`, admin in
+`src/routes/(admin)/admin/` (not built yet), D1 migrations in `drizzle/`, theme tokens in
+`src/routes/layout.css`, and all D1/R2/provider code under `src/lib/server/`, organised by domain
+(`catalog/`, `orders/`, `customers/`, `providers/`).
 
 ---
 
@@ -177,9 +147,12 @@ COD carries fake-order risk, so `pending → confirmed` is a deliberate step (se
 
 ### 6.3 Product images
 
-1. Admin uploads in the admin panel; original stored in R2 at `products/{productId}/{uuid}.{ext}`.
-2. `src/lib/images.ts` builds URLs like `/cdn-cgi/image/width=600,quality=80,format=auto/products/...`.
-3. Use a fixed set of widths (e.g. 320 / 600 / 1200) with `srcset` to keep unique transformations low.
+1. Admin uploads in the admin panel (resized in the browser to a 2000px long edge); the original is
+   stored in R2 at a new, unique key `products/{productId}/{uuid}.{ext}` and never overwritten.
+2. `src/routes/products/[...path]/+server.ts` serves originals from R2 at `/products/...` with a
+   one-year immutable cache header.
+3. `src/lib/images.ts` builds `/cdn-cgi/image/width={400|800|1200},quality=75,format=auto/products/...`
+   URLs; only those three widths are approved (AGENTS.md section 10).
 
 ### 6.4 Product videos
 

@@ -5,8 +5,8 @@ export const IMAGE_WIDTHS = [400, 800, 1200] as const;
 export type ImageWidth = (typeof IMAGE_WIDTHS)[number];
 
 /**
- * Same-origin path of the original R2 object, per docs/ARCHITECTURE.md 6.3.
- * shortcut: assumes the bucket is served at the site root; change here if R2 gets its own domain or prefix.
+ * Same-origin path of the original R2 object, per docs/ARCHITECTURE.md 6.3. Served by
+ * `src/routes/products/[...path]/+server.ts`, so keys must start with `products/`.
  */
 function originalUrl(key: string): string {
 	const segments = key.split('/');

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { m } from '#lib/paraglide/messages.js';
 	import { getLocale } from '#lib/paraglide/runtime.js';
+	import { numberLocale } from '#lib/money.ts';
 	import Icon from './Icon.svelte';
 	import { stepQuantity } from './quantity';
 
@@ -38,7 +39,7 @@
 		onclick={() => step(-1)}><Icon name="minus" /></button
 	>
 	<output class="min-w-7 text-center font-semibold" aria-live="polite"
-		>{value.toLocaleString(getLocale() === 'bn' ? 'bn-BD' : 'en-US')}</output
+		>{value.toLocaleString(numberLocale(getLocale()))}</output
 	>
 	<button
 		type="button"

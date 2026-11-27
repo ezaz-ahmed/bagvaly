@@ -54,6 +54,8 @@
 	--spacing-gutter: 16px;
 	--spacing-header: 64px;
 	--spacing-tap: 48px;
+	/* Phone tab bar plus the iOS home-indicator area; 0 from `md`, where there is no tab bar. */
+	--spacing-tabbar: calc(64px + env(safe-area-inset-bottom));
 
 	--font-heading: 'Fraunces Variable', 'Hind Siliguri', Georgia, serif;
 	--font-heading--font-variation-settings: 'SOFT' 100;
@@ -66,6 +68,16 @@
 		:root {
 			--spacing-gutter: 32px;
 			--spacing-header: 80px;
+			--spacing-tabbar: 0px;
+		}
+	}
+
+	/* While typing, the on-screen keyboard needs the room: the tab bar hides and sticky bars drop. */
+	:root:has(:is(input:not([type='checkbox'], [type='radio']), textarea):focus) {
+		--spacing-tabbar: 0px;
+
+		& [data-tabbar] {
+			display: none;
 		}
 	}
 

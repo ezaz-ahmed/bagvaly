@@ -1,4 +1,4 @@
-import { discountPercent, formatPrice } from '#lib/money.ts';
+import { discountPercent, formatPrice, numberLocale } from '#lib/money.ts';
 
 /**
  * What `Price` shows: the current price, plus the struck-through compare-at price and the
@@ -9,9 +9,6 @@ export function priceParts(amount: number, compareAt: number | null | undefined,
 	return {
 		now: formatPrice(amount, locale),
 		was: percent === null ? null : formatPrice(compareAt as number, locale),
-		percent:
-			percent === null
-				? null
-				: new Intl.NumberFormat(locale === 'bn' ? 'bn-BD' : 'en-US').format(percent)
+		percent: percent === null ? null : new Intl.NumberFormat(numberLocale(locale)).format(percent)
 	};
 }

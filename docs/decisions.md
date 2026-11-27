@@ -2,6 +2,14 @@
 
 Short record of significant decisions and why they were made. Newest first.
 
+## 2026-11-20: Cache key keeps only page params; navigation data is not cached
+
+The edge cache key is the path plus `category`, `sort` and `cursor` only. Ad clicks add a unique
+`fbclid` and `utm_*` tags, so a full-URL key missed the cache for nearly all campaign traffic.
+Attribution is read from the address in the browser, so it does not need the key. SvelteKit's
+`__data.json` (client-side navigation) is no longer cached, because purges list page URLs only
+and a cached copy would outlive an admin edit.
+
 ## 2026-11-13: Edge cache for public pages and purge by URL
 
 Approved in issue #62. `cachedPublic()` in `src/lib/server/cache.ts` (or the `publicCacheHandle()`

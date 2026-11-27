@@ -47,6 +47,8 @@ from `wrangler.jsonc` `vars` (`ORIGIN`) and `wrangler secret put` (secrets).
 | ------------------------------------------------------------------------ | ------------------------------------------------------ |
 | `ORIGIN`                                                                 | Public base URL, e.g. `http://localhost:5173`          |
 | `BETTER_AUTH_SECRET`                                                     | Session signing secret (32+ random characters)         |
+| `CACHE_PURGE_ZONE_ID`                                                    | Zone ID for purging cached pages (Worker var)          |
+| `CACHE_PURGE_TOKEN`                                                      | API token, Zone > Cache Purge only (Worker secret)     |
 | `CLOUDFLARE_ACCOUNT_ID`, `CLOUDFLARE_DATABASE_ID`, `CLOUDFLARE_D1_TOKEN` | Only for `drizzle-kit` commands that talk to remote D1 |
 
 ### Sample catalogue data
@@ -112,12 +114,21 @@ src/
   lib/
     server/
       auth.ts          # Better Auth (phone OTP)
-      catalog/         # Product input validation (Valibot) and slug helper
+      cache.ts         # Edge cache for public pages, purge URL list
+      cart.ts          # Cart cookie: parse, update, load with live prices and stock
+      catalog/         # Product queries and input validation (Valibot)
+      customers/       # Customer upsert, blocking, delivered/returned counts
       db/              # Drizzle schema and client
-      providers/sms/   # SMS adapter (dev-only until a gateway is chosen)
-    localized.ts       # Bangla text with English fallback
+      orders/          # Order creation, checkout schema, status transitions
+      providers/       # cloudflare/ (cache purge), sms/ (dev-only until a gateway is chosen)
+    components/        # ui/ primitives and shop/ storefront components
+    attribution.ts     # UTM/fbclid capture for orders
+    images.ts          # Image Transformations URLs (approved widths only)
+    money.ts           # Poisha helpers and price/number formatting
     phone.ts           # Bangladeshi phone normalization (+8801XXXXXXXXX)
-  routes/              # Pages; layout.css holds the brand theme tokens
+  routes/
+    (shop)/            # Storefront: home, shop, product, cart, checkout, order, help pages
+    products/          # Original product photos from R2
 messages/              # en.json, bn.json (Paraglide)
 drizzle/               # Committed D1 migrations
 scripts/               # Local development scripts (catalogue seed)
@@ -133,8 +144,10 @@ the first deploy:
 1. Create the production and staging D1 databases (`wrangler d1 create … --location apac`) and
    the R2 buckets.
 2. Put the real IDs, bucket names and `ORIGIN` values in `wrangler.jsonc`.
-3. Set secrets per environment with `wrangler secret put`.
-4. Add deploy and remote-migration package scripts.
+3. Set secrets per environment with `wrangler secret put`, and set `CACHE_PURGE_ZONE_ID`.
+4. Add a WAF rate-limiting rule for `POST` requests to `/checkout` and `/bn/checkout` (for example
+   5 per 10 minutes per IP). Checkout has no bot check yet, and every order holds stock.
+5. Add deploy and remote-migration package scripts.
 
 Releases follow the order in AGENTS.md: local validation, then staging migrations and tests,
 then production.

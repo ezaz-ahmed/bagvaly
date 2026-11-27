@@ -34,10 +34,13 @@ test('locale lives in the URL and the switch links to the other locale', async (
 	await expect(page.getByRole('link', { name: 'কার্ট' })).toHaveAttribute('href', '/bn/cart');
 });
 
-test('mobile menu opens, closes on Escape and returns focus', async ({ page }) => {
+test('phone tab bar marks the current tab and opens the menu', async ({ page }) => {
 	await page.setViewportSize({ width: 390, height: 844 });
 	await page.goto('/');
-	const button = page.getByRole('button', { name: 'Open menu' });
+	const tabs = page.getByRole('navigation', { name: 'Quick navigation' });
+	await expect(tabs.getByRole('link', { name: 'Home' })).toHaveAttribute('aria-current', 'page');
+	await expect(tabs.getByRole('link', { name: 'Shop' })).not.toHaveAttribute('aria-current');
+	const button = tabs.getByRole('button', { name: 'Menu' });
 	await button.click();
 	const menu = page.getByRole('dialog', { name: 'Menu' });
 	await expect(menu.getByRole('link', { name: 'Tote' })).toHaveAttribute(

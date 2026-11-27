@@ -4,6 +4,7 @@
 	import { Badge, Price } from '#lib/components/ui/index.ts';
 	import { m } from '#lib/paraglide/messages.js';
 	import { getLocale, localizeHref } from '#lib/paraglide/runtime.js';
+	import { numberLocale } from '#lib/money.ts';
 	import ProductImage from './ProductImage.svelte';
 	import { cardBadge, type ProductCardData } from './product-card';
 
@@ -55,9 +56,7 @@
 		{#if showColours && product.colourCount > 1}
 			<p class="text-sm text-ink-600">
 				{m.shop_colour_count({
-					count: new Intl.NumberFormat(getLocale() === 'bn' ? 'bn-BD' : 'en-US').format(
-						product.colourCount
-					)
+					count: new Intl.NumberFormat(numberLocale(getLocale())).format(product.colourCount)
 				})}
 			</p>
 		{/if}

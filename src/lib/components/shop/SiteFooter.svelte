@@ -3,12 +3,13 @@
 	import { resolve } from '$app/paths';
 	import { getLocale, localizeHref } from '#lib/paraglide/runtime.js';
 	import { m } from '#lib/paraglide/messages.js';
+	import { numberLocale } from '#lib/money.ts';
 	import { contact, helpLinks, socialLinks } from '#lib/config.ts';
 	import { Icon } from '#lib/components/ui/index.ts';
 	import LanguageSwitch from './LanguageSwitch.svelte';
 
 	const socials = socialLinks.filter((link) => link.url);
-	const year = new Intl.NumberFormat(getLocale() === 'bn' ? 'bn-BD' : 'en-US', {
+	const year = new Intl.NumberFormat(numberLocale(getLocale()), {
 		useGrouping: false
 	}).format(new Date().getFullYear());
 

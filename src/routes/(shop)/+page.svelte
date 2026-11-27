@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { numberLocale } from '#lib/money.ts';
 	import type { Path } from '$app/types';
 	import { resolve } from '$app/paths';
 	import { m } from '#lib/paraglide/messages.js';
@@ -14,7 +15,7 @@
 	// The locale only changes with a full page load (LanguageSwitch), so plain constants are fine.
 	const locale = getLocale();
 	const otherLocale = locale === 'bn' ? 'en' : 'bn';
-	const n = new Intl.NumberFormat(locale === 'bn' ? 'bn-BD' : 'en-US').format;
+	const n = new Intl.NumberFormat(numberLocale(locale)).format;
 	const { inside_dhaka: inside, outside_dhaka: outside } = DELIVERY_ZONES;
 	const shopHref = (query = '') => resolve(localizeHref(`/shop${query}`) as Path);
 

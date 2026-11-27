@@ -1,5 +1,8 @@
 /** Money is stored and calculated as integer poisha (৳1 = 100 poisha). */
 
+/** `Intl` locale for numbers in the active UI locale: Bangla digits for `bn`, else English. */
+export const numberLocale = (locale: string) => (locale === 'bn' ? 'bn-BD' : 'en-US');
+
 /**
  * Converts a taka amount (e.g. from an admin form) to integer poisha.
  * Throws for non-finite, negative, or sub-poisha (more than 2 decimals) amounts.
@@ -21,7 +24,7 @@ export function formatPrice(poisha: number, locale: string = 'en'): string {
 	if (!Number.isSafeInteger(poisha)) throw new RangeError(`Invalid poisha amount: ${poisha}`);
 	const abs = Math.abs(poisha);
 	const digits = abs % 100 === 0 ? 0 : 2;
-	const number = new Intl.NumberFormat(locale === 'bn' ? 'bn-BD' : 'en-US', {
+	const number = new Intl.NumberFormat(numberLocale(locale), {
 		minimumFractionDigits: digits,
 		maximumFractionDigits: digits
 	}).format(abs / 100);

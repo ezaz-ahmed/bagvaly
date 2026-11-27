@@ -304,3 +304,70 @@ export async function getProductBySlug(db: Db, slug: string, locale: string) {
 }
 
 export type ProductDetail = NonNullable<Awaited<ReturnType<typeof getProductBySlug>>>;
+
+// The colour's own first photo, else the product cover. NULL variant_id sorts last under DESC.
+const lineImageId = sql`(select pi.id from product_images pi where pi.product_id = ${products.id} order by (pi.variant_id = ${productVariants.id}) desc, pi.position, pi.id limit 1)`;
+
+/**
+ * Live data for cart and checkout lines, keyed by variant id. Includes the stock count, so it is
+ * for personal (uncached) pages only. Draft products and unknown ids are left out.
+ */
+export async function getCartItems(db: Db, variantIds: readonly number[], locale: string) {
+	if (variantIds.length === 0) return new Map<number, CartItem>();
+	const rows = await db
+		.select({
+			variantId: productVariants.id,
+			stock: productVariants.stock,
+			colourNameEn: productVariants.colourNameEn,
+			colourNameBn: productVariants.colourNameBn,
+			slug: products.slug,
+			nameEn: products.nameEn,
+			nameBn: products.nameBn,
+			price: products.price,
+			imageKey: productImages.r2Key,
+			imageAltEn: productImages.altEn,
+			imageAltBn: productImages.altBn,
+			imageWidth: productImages.width,
+			imageHeight: productImages.height
+		})
+		.from(productVariants)
+		.innerJoin(products, eq(productVariants.productId, products.id))
+		.leftJoin(productImages, eq(productImages.id, lineImageId))
+		.where(and(inArray(productVariants.id, [...variantIds]), ne(products.status, 'draft')));
+
+	return new Map(
+		rows.map((row): [number, CartItem] => {
+			const name = localized(row.nameEn, row.nameBn, locale);
+			return [
+				row.variantId,
+				{
+					variantId: row.variantId,
+					slug: row.slug,
+					name,
+					colourName: localized(row.colourNameEn, row.colourNameBn, locale),
+					price: row.price,
+					stock: row.stock,
+					image:
+						row.imageKey === null
+							? null
+							: {
+									key: row.imageKey,
+									alt: localized(row.imageAltEn ?? '', row.imageAltBn, locale) || name,
+									width: row.imageWidth!,
+									height: row.imageHeight!
+								}
+				}
+			];
+		})
+	);
+}
+
+export type CartItem = {
+	variantId: number;
+	slug: string;
+	name: string;
+	colourName: string;
+	price: number;
+	stock: number;
+	image: CatalogImage | null;
+};

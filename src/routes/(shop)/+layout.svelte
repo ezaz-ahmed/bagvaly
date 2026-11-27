@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+	import { captureAttribution } from '#lib/attribution.ts';
 	import { m } from '#lib/paraglide/messages.js';
 	import { Icon } from '#lib/components/ui/index.ts';
 	import SiteFooter from '#lib/components/shop/SiteFooter.svelte';
@@ -6,9 +8,12 @@
 	import type { LayoutProps } from './$types';
 
 	let { children }: LayoutProps = $props();
+
+	// Ads land on any storefront page; keep their campaign for the order.
+	onMount(() => captureAttribution(new URL(location.href)));
 </script>
 
-<div class="flex min-h-dvh flex-col">
+<div class="flex min-h-dvh flex-col pb-tabbar">
 	<a
 		href="#main"
 		class="sr-only rounded-md bg-ivory-50 px-4 py-3 font-semibold focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50"

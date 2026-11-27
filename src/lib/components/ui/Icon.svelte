@@ -3,6 +3,7 @@
 	// arcs so every icon is a single path.
 	const icons = {
 		menu: 'M4 7h16M4 12h16M4 17h16',
+		home: 'M4 10.5L12 4l8 6.5V20h-5.5v-6h-5v6H4z',
 		search: 'M4.5 11a6.5 6.5 0 1 0 13 0a6.5 6.5 0 1 0-13 0M20 20l-4.2-4.2',
 		heart: 'M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z',
 		bag: 'M6 8h12l-1 12H7L6 8zM9 8V7a3 3 0 0 1 6 0v1',

@@ -20,13 +20,15 @@ const handleParaglide: Handle = ({ event, resolve }) =>
 		);
 	});
 
+let auth: ReturnType<typeof createAuth> | undefined;
+
 const handleBetterAuth: Handle = async ({ event, resolve }) => {
 	// Bindings are unavailable while prerendering; prerendered pages are public and session-free.
 	if (building) return resolve(event);
 
-	event.locals.auth = createAuth(env.DB);
+	// One instance per Worker isolate: building it is not free, and it holds no per-request state.
+	event.locals.auth = auth ??= createAuth(env.DB);
 
-	const { auth } = event.locals;
 	const session = await auth.api.getSession({ headers: event.request.headers });
 
 	if (session) {
@@ -38,7 +40,15 @@ const handleBetterAuth: Handle = async ({ event, resolve }) => {
 };
 
 // Public storefront pages served from the edge cache. `/bn` reroutes to the same route ID; the
-// cache key is the full URL, so each locale gets its own entry.
-const handleCache = publicCacheHandle(['/(shop)']);
+// cache key is the path plus page params, so each locale gets its own entry. Cart, checkout and
+// order pages are personal and stay out. Only GETs are cached, so the product page's add-to-bag POST is not.
+const handleCache = publicCacheHandle([
+	'/(shop)',
+	'/(shop)/shop',
+	'/(shop)/bags/[slug]',
+	'/(shop)/delivery',
+	'/(shop)/contact',
+	'/(shop)/track'
+]);
 
 export const handle: Handle = sequence(handleCache, handleParaglide, handleBetterAuth);

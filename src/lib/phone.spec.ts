@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vite-plus/test';
-import { isCanonicalBdPhone, normalizeBdPhone } from './phone';
+import { isCanonicalBdPhone, localBdPhone, normalizeBdPhone } from './phone';
 
 describe('normalizeBdPhone', () => {
 	it.each([
@@ -33,5 +33,12 @@ describe('isCanonicalBdPhone', () => {
 		expect(isCanonicalBdPhone('+8801712345678')).toBe(true);
 		expect(isCanonicalBdPhone('01712345678')).toBe(false);
 		expect(isCanonicalBdPhone('+880 1712345678')).toBe(false);
+	});
+});
+
+describe('localBdPhone', () => {
+	it('shows the local form of a canonical number', () => {
+		expect(localBdPhone('+8801712345678')).toBe('01712345678');
+		expect(localBdPhone('not a phone')).toBe('not a phone');
 	});
 });

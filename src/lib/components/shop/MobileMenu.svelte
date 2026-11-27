@@ -28,9 +28,11 @@
 	id="mobile-menu"
 	aria-label={m.layout_menu()}
 	onclick={(event) => event.target === dialog && dialog.close()}
-	class="m-0 h-dvh max-h-none w-[min(22rem,88vw)] max-w-none -translate-x-full bg-background p-0 text-ink-900 shadow-lg transition-[translate,overlay,display] transition-discrete duration-panel ease-brand backdrop:bg-ink-900/40 open:translate-x-0 starting:open:-translate-x-full"
+	class="m-0 h-dvh max-h-none w-[min(22rem,88vw)] max-w-none bg-background p-0 text-ink-900 shadow-lg transition-[translate,overlay,display] transition-discrete duration-panel ease-brand backdrop:bg-ink-900/40 max-md:mt-auto max-md:h-auto max-md:max-h-[85dvh] max-md:w-full max-md:translate-y-full max-md:rounded-t-lg max-md:open:translate-y-0 md:-translate-x-full md:open:translate-x-0 max-md:starting:open:translate-y-full md:starting:open:-translate-x-full"
 >
-	<div class="flex min-h-full flex-col gap-6 px-gutter pt-2 pb-8">
+	<div
+		class="flex min-h-full flex-col gap-6 px-gutter pt-2 pb-[calc(2rem+env(safe-area-inset-bottom))]"
+	>
 		<div class="-mx-2 flex h-header items-center justify-between">
 			<span
 				class="px-2 font-heading text-[26px] leading-none font-semibold tracking-[.16em] text-burgundy-600"

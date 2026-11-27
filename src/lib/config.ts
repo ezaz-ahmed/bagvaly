@@ -24,7 +24,7 @@ export const occasions = [
 	{ category: 'clutch', label: m.home_occasion_festive }
 ];
 
-/** Help pages; they 404 until their own issues build them. */
+/** Help pages in the header menu and footer. */
 export const helpLinks = [
 	{ path: '/track', label: m.layout_track_order },
 	{ path: '/delivery', label: m.layout_delivery_exchange },

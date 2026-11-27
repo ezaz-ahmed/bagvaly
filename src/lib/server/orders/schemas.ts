@@ -1,9 +1,13 @@
 import * as v from 'valibot';
+import { ATTRIBUTION_MAX_LENGTH as ATTR } from '#lib/attribution.ts';
 import { DISTRICTS } from '#lib/districts.ts';
 import { normalizeBdPhone } from '#lib/phone.ts';
 
 /** Most units of one colour allowed on one order line (owner decision, issue #61). */
 export const MAX_QTY_PER_LINE = 5;
+
+/** Most lines (colours) on one order; the cart keeps to the same cap. */
+export const MAX_ORDER_LINES = 20;
 
 const requiredText = (max: number) => v.pipe(v.string(), v.trim(), v.nonEmpty(), v.maxLength(max));
 const optionalText = (max: number) =>
@@ -39,7 +43,7 @@ export const checkoutInputSchema = v.object({
 	items: v.pipe(
 		v.array(checkoutItemSchema),
 		v.minLength(1),
-		v.maxLength(20),
+		v.maxLength(MAX_ORDER_LINES),
 		v.check(
 			(items) => new Set(items.map((item) => item.variantId)).size === items.length,
 			'Each colour may appear only once'
@@ -47,12 +51,12 @@ export const checkoutInputSchema = v.object({
 	),
 	/** Generated once per checkout attempt by the client; a retry with the same key is a no-op. */
 	idempotencyKey: v.pipe(v.string(), v.regex(/^[A-Za-z0-9_-]{16,64}$/)),
-	utmSource: attribution(200),
-	utmMedium: attribution(200),
-	utmCampaign: attribution(200),
-	utmContent: attribution(200),
-	utmTerm: attribution(200),
-	fbclid: attribution(500)
+	utmSource: attribution(ATTR.utmSource),
+	utmMedium: attribution(ATTR.utmMedium),
+	utmCampaign: attribution(ATTR.utmCampaign),
+	utmContent: attribution(ATTR.utmContent),
+	utmTerm: attribution(ATTR.utmTerm),
+	fbclid: attribution(ATTR.fbclid)
 });
 
 export type CheckoutInput = v.InferOutput<typeof checkoutInputSchema>;

@@ -23,3 +23,8 @@ export function normalizeBdPhone(input: string): string | null {
 export function isCanonicalBdPhone(input: string): boolean {
 	return CANONICAL_BD_MOBILE.test(input);
 }
+
+/** Local display form `01XXXXXXXXX` of a canonical number; other input is returned unchanged. */
+export function localBdPhone(canonical: string): string {
+	return isCanonicalBdPhone(canonical) ? `0${canonical.slice(4)}` : canonical;
+}
